@@ -32,5 +32,5 @@
 
 ## Description:
 
-Learn.AI is an innovative educational platform designed to help engineering students master complex subjects through AI-driven learning tools. The platform provides personalized AI Courses & Certifications, Curated Projects, Project Certifications.
+<b>Learn.AI</b> is an innovative educational platform designed to help engineering students master complex subjects through AI-driven learning tools. The platform provides personalized AI Courses & Certifications, Curated Projects, Project Certifications.
 
