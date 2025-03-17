@@ -5,6 +5,10 @@
 <h1>Assesment Rubrics:</h1>
 <table>
   <tr>
+    <th>Rubric</th>
+    <th>Check</th>
+  </tr>
+  <tr>
   <td>UI Framework</td>
   <td>✅</td>
   </tr>
