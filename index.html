@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn.AI</title>
+    <link rel="icon" href="Assets/Logo.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil:opsz,wght@10..72,100..900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+        html{
+            scroll-behavior: smooth;
+            ::-webkit-scrollbar {
+            width: 10px;
+            }
+
+            ::-webkit-scrollbar-track {
+            background: #282828;
+            }
+
+            ::-webkit-scrollbar-thumb {
+            background: #0a5a5d;
+            border: 1px solid #282828;
+            height: 2rem;
+            }
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        
+        .main{
+            background: url('Assets/AI.gif');
+            background-repeat: no-repeat;
+            background-size: cover;
+            border: none;
+            background-position: center;
+        }
+
+        header {
+            background-color: transparent;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-logo {
+            font-size: 2rem;
+            font-family: 'Raleway', sans-serif;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-family: 'Raleway', sans-serif;
+            transition: all 0.5s;
+            font-weight: 600;
+            padding:0.5rem;
+            border-radius: 5px;
+        }
+
+
+        nav ul li a:hover {
+            background-color: #0a5a5d;
+            color: rgb(222, 222, 222);
+        }
+
+        .button-sign{
+            background-color: #639597;
+            color: #ffffff;
+            font-size: 1.3rem;
+            font-family: 'Raleway', sans-serif;
+            padding: 10px 10px;
+            border-radius: 5px;
+            border: none;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background-color linear 0.3s;
+        }
+
+        .button-sign:hover{
+            background-color: #0a5a5d;
+            color: #ffffff;
+            border: none;
+        }
+
+        .hero {
+            background-size: cover;
+            background-position: center;
+            color: white;
+            height: 45vh;
+            text-align: center;
+            padding: 150px 20px;
+            animation: float linear 0.3s;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 25px;
+            background: url('Assets/mask-2.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: float linear 1s;
+        }
+
+        .hero p {
+            animation: fade linear 0.3s;
+            font-size: 1.5em;
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            background-color: #00f7ff;
+            color: #282828;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color linear 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #b6fff3;
+        }
+
+        .section {
+            padding: 30px 20px;
+            background-color: rgb(0, 0, 0);
+            color: white;
+        }
+        a{
+            color: cyan;
+        }
+
+        .section h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            background: url('Assets/mask-2.jpg');
+            background-clip: text;
+            background-position: center;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+        }
+
+        .services, .pricing {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .service{
+            width: 320px;
+            padding: 30px;
+            border: 1px solid #eee;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            text-align: center;
+            font-family: 'Chakra Petch', sans-serif;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            animation: left linear;
+            animation-timeline: view();
+            animation-range: entry 0 cover 25%;
+        }
+
+        .service-ai {
+            width: 320px;
+            padding: 30px;
+            border: 1px solid #eee;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            text-align: center;
+            font-family: 'Chakra Petch', sans-serif;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            animation: right linear;
+            animation-timeline: view();
+            animation-range: entry 0 cover 25%;
+            overflow-y: hidden;
+        }
+
+        .price {
+            width: 320px;
+            padding: 30px;
+            border: 1px solid #eee;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            text-align: center;
+            font-family: 'Chakra Petch', sans-serif;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            animation: scroll linear;
+            animation-timeline: view();
+            animation-range: entry 0 cover 50%;
+        }
+
+        .service:hover {
+            transform: translateY(-5px);
+        }
+
+        .price:hover{
+            transform: scale(1.03);
+        }
+
+        footer {
+            background-color: #282828;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+        .section p, .section h4, .section h3{
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        .login-signup {
+            display: flex;
+        }
+
+        @keyframes left{
+            from{
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            to{
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes right{
+            from{
+                transform: translateX(20px);
+                opacity: 0;
+            }
+            to{
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes scroll{
+            from{
+                scale: 0.5;
+                opacity: 0;
+            }
+            to{
+                opacity: 1;
+                scale: 1;
+            }
+        }
+
+        @keyframes appear{
+            from{
+                opacity: 0;
+            }
+            to{
+                opacity: 1;
+            }
+        }
+
+        .login-signup a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+            transition: color 0.3s;
+        }
+
+        .login-signup a:hover {
+            color: #ffcc00;
+        }
+        .hide-desktop{
+            background: none;
+            border: none;
+        }
+        #menu-toggle{
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        .testimonials {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .testimonial {
+            max-width: 260px;
+            padding: 30px;
+            border: 1px solid #eee;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            text-align: center;
+            font-family: 'Chakra Petch', sans-serif;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            animation: appear linear;
+            animation-timeline: view();
+            animation-range: entry 0 cover 50%;
+        }
+
+        .testimonial:hover{
+            transform: translateY(-5px);
+            box-shadow:0 0 10px  #00f7ff;
+        }
+
+        .ai-courses{
+            color: aqua;
+        }
+
+
+        @keyframes float {
+            0%{
+                opacity: 0;
+            }
+            50%{
+                opacity: 0.5;
+            }
+            100%{
+                opacity: 1;
+            }
+        }
+
+        @keyframes fade{
+            0%{
+                font-size: 0;
+            }
+            50%{
+                font-size: 0.65em;
+            }
+            100%{
+                font-size: 1.3em;
+            }
+        }
+        
+        @media (min-width:768px){
+            .hide-desktop{
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                display: block;
+                gap: 0.2rem;
+                align-items: flex-end;
+            }
+
+            .hide-mobile{
+                display: none;
+            }
+
+            .header-logo{
+                display: inline;
+            }
+
+            .header-logo .hide-desktop{
+                margin-right: auto;
+            }
+
+            nav{
+                display: inline;
+            }
+
+            #hide-mobile{
+                display: none;
+            }
+
+            nav ul {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-evenly;
+                display: none;
+                margin-top: 10px;
+            }
+
+            nav ul li {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+
+            .hero {
+                padding: 150px 20px;
+            }
+
+            .hero h1 {
+                font-size: 2.5em;
+            }
+
+            .services, .pricing {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .service,.service-ai, .price {
+                width: 84%;
+            }
+
+            .login-signup {
+                margin-top: 10px;
+            }
+        }
+
+        #scrollUpBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: #4a4a4a;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            transition: opacity 0.3s, transform 0.3s;
+            opacity: 0;
+            transform: scale(0);
+        }
+
+        #scrollUpBtn.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+    </style>
+</head>
+<body>
+    <div class='main'>
+    <header class="head">
+        <div class="header-logo"><button class="hide-desktop" id="menu-toggle" style="font-size: 2rem;">☰</button> Learn.AI </div>
+        <nav>
+            <ul>
+                <li><a href="#why-ai">Why AI?</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li class="hide-desktop"><a href="signup.html" class="button-sign">Signup</a></li>
+            </ul>
+        </nav>
+        <a href="signup.html" class="button-sign" id="hide-mobile">Signup</a>
+    </header>
+
+    <section class="hero">
+        <h1>Learn AI Smarter, Faster, Better!</h1>
+        <p>Empowering Minds with AI-Powered Learning</p>
+        <a href="#services" class="button-sign">Explore Our Courses</a>
+    </section>
+    </div>
+
+    <section id="why-ai" class="section">
+        <h2 style="animation: float linear 1s; animation-timeline: view();">The Future is Now AI</h2>
+        <div class="services">
+            <div class="service-ai">
+                <img src="Assets/automation.svg">
+                <h3>Automation & Efficiency</h3>
+                <p>AI automates repetitive tasks, boosting efficiency and productivity across industries.</p>
+            </div>
+            <div class="service-ai">
+                <img src="Assets/innovation.svg">
+                <h3>Driving Innovation</h3>
+                <p>AI is at the core of groundbreaking advancements in healthcare, finance, and technology.</p>
+            </div>
+            <div class="service-ai">
+                <img src="Assets/career.svg">
+                <h3>Career Opportunities</h3>
+                <p>The AI job market is booming, with high-paying roles in ML, DS, and AI development.</p>
+            </div>
+            <div class="service-ai">
+                <img src="Assets/dm.svg">
+                <h3>Smarter Decision-Making</h3>
+                <p>AI helps analyze vast amounts of data to provide insights and optimize strategies.</p>
+            </div>
+            <div class="service-ai">
+                <img src="Assets/personalization.svg">
+                <h3>Personalization</h3>
+                <p>From recommendation systems to chatbots, AI tailors user experiences like never before.</p>
+            </div>
+            <div class="service-ai">
+                <img src="Assets/future.svg">
+                <h3>The Future of AI</h3>
+                <p>AI is continuously evolving, shaping the future of how we live, work, and interact.</p>
+            </div>   
+        </div>
+    </section>
+    
+
+    <section id="services" class="section">
+        <h2 style="animation: float linear 1s;animation-timeline: view();">Our Path Breaking Courses</h2>
+        <div class="services">
+            <div class="service">
+                <img src="Assets/ai-basics.svg">
+                <h3>AI for Beginners <span class="ai-courses">#1 Trending</span></h3>
+                <p>Start your AI journey with easy-to-follow fundamentals.</p>
+                <a href="login.html" class="btn">Enroll Now!</a>
+            </div>
+            <div class="service">
+                <img src="Assets/ml.svg">
+                <h3>Machine Learning</h3>
+                <p>Master ML concepts with real-world projects and applications.</p>
+                <a href="login.html" class="btn">Enroll Now!</a>
+            </div>
+            <div class="service">
+                <img src="Assets/dl.svg">
+                <h3>Deep Learning</h3>
+                <p>Explore neural networks, CNNs, and advanced AI techniques.</p>
+                <a href="login.html" class="btn">Enroll Now!</a>
+            </div>
+            <div class="service">
+                <img src="Assets/nlp.svg">
+                <h3>NLP <span class="ai-courses">#2 Trending</span></h3>
+                <p>Learn how AI understands and processes human language.</p>
+                <a href="login.html" class="btn">Enroll Now!</a>
+            </div>
+            <div class="service">
+                <img src="Assets/gen-ai.svg">
+                <h3>Generative AI <span class="ai-courses">#3 Trending</span></h3>
+                <p>Understand the fundamentals of AI-generated content and creativity.</p>
+                <a href="login.html" class="btn">Enroll Now!</a>
+            </div>
+            <div class="service">
+                <img src="Assets/llm.svg">
+                <h3>Working with LLMs</h3>
+                <p>Learn how to build and fine-tune LLM's for AI applications.</p>
+                <a href="login.html" class="btn">Enroll Now!</a>
+            </div>          
+        </div>
+    </section>
+
+    
+
+    <section id="pricing" class="section">
+        <h2 style="animation: float linear 1s;animation-timeline: view();">Our Pricing</h2>
+        <div class="pricing">
+            <div class="price">
+                <img src="Assets/basic.svg">
+                <h3>Basic Plan</h3>
+                <p>Free</p>
+                <p>Access to beginner AI courses and free trial classes.</p>
+                <a href="login.html" class="btn">Buy Now!</a>
+            </div>
+            <div class="price">
+                <img src="Assets/pro.svg">
+                <h3>Pro Plan</h3>
+                <p>$29/month</p>
+                <p>Full access to AI courses, hands-on projects.</p>
+                <a href="login.html" class="btn">Buy Now!</a>
+            </div>
+            <div class="price">
+                <img src="Assets/elite.svg">
+                <h3>Elite Plan</h3>
+                <p>$99 (One-time)</p>
+                <p>Lifetime access to all AI courses and certifications.</p>
+                <a href="login.html" class="btn">Buy Now!</a>
+            </div>
+            
+        </div>
+    </section>
+
+    <section id="testimonials" class="section">
+        <h2 style="text-align: left;">What Our Students Say</h2>
+        <div class="testimonials">
+            <div class="testimonials">
+                <div class="testimonial">
+                    <p>"Learn.AI made AI concepts so easy to understand! The interactive learning approach is amazing." - <b>Dheeraj</b></p>
+                </div>
+                <div class="testimonial">
+                    <p>"The AI-powered study plans have helped me stay on track with my learning. Highly recommended!" - <b>Sahil Pareek</b></p>
+                </div>
+                <div class="testimonial">
+                    <p>"I was struggling with Python for AI, but Learn.AI simplified everything with hands-on projects." - <b>Arjun Kumar</b></p>
+                </div>
+                <div class="testimonial">
+                    <p>"A game-changer for students! The AI-generated feedback on my essays improved my writing skills." - <b>Sahasra</b></p>
+                </div>
+                <div class="testimonial">
+                    <p>"Learn.AI provides high-quality content at minimal cost. Best platform for aspiring AI developers!" - <b>Avinash Reddy</b></p>
+                </div>
+                <div class="testimonial">
+                    <p>"The free trial classes were so good that I immediately enrolled in the full course. Worth every penny!" - <b>Ayesha Khan</b></p>
+                </div>
+                <div class="testimonial">
+                    <p>"Learn.AI helped me land my first internship in AI! The practical approach and real-world examples are fantastic." - <b>David Johnson</b></p>
+                </div>
+                <div class="testimonial">
+                    <p>"I love how Learn.AI integrates AI tools into the learning process. It’s engaging and super effective!" - <b>Priya Patel</b></p>
+                </div>
+            </div>
+             
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <h2>About Learn.AI</h2>
+        <p>Learn.AI is committed to revolutionizing education with AI-driven learning experiences.<br> Our platform offers personalized study plans, AI-powered feedback, and interactive courses to help students and professionals master AI effortlessly.<br> Whether you're a beginner or an advanced learner, Learn.AI provides the tools and resources you need to excel in the world of AI.</p>
+        <br>
+        <h2>Any Queries?</h2>
+        <h4>Write to us: <a href="mailto:ch.sc.u4cse24130@ch.students.amrita.edu">Click Here!</a></h4>
+
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Learn.AI - All rights reserved.</p>
+    </footer>
+    <button id="scrollUpBtn" onclick="scrollToTop()"><img src="Assets/up.svg"></button>
+    <script src="JS Files/script.js"></script>
+
+</body>
+</html>
