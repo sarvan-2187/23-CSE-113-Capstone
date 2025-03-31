@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn.AI - Pricing</title>
+    <link rel="icon" href="Assets/Logo.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil:opsz,wght@10..72,100..900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+        html {
+            scroll-behavior: smooth;
+        }
+
+        html::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        html::-webkit-scrollbar-track {
+            background: #282828;
+        }
+
+        html::-webkit-scrollbar-thumb {
+            background: cyan;
+            border: 1px solid #282828;
+            height: 2rem;
+            border-radius: 3px;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            background-color: #000;
+            color: white;
+        }
+        
+        .main-pricing {
+            background: url('Assets/AI.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            border: none;
+            background-position: center;
+            height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        header {
+            background-color: transparent;
+            color: rgb(255, 255, 255);
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            position: absolute;
+            top: 0;
+        }
+
+        .header-logo {
+            font-size: 2rem;
+            font-family: 'Raleway', sans-serif;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-family: 'Raleway', sans-serif;
+            transition: all 0.5s;
+            font-weight: 600;
+            padding: 0.5rem;
+            border-radius: 5px;
+        }
+
+        nav ul li a:hover {
+            background-color: #83b1b1;
+            color: rgb(33, 33, 33);
+        }
+
+        .button-sign {
+            background-color: transparent;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-size: 1.3rem;
+            font-family: 'Raleway', sans-serif;
+            padding: 10px 10px;
+            border-radius: 5px;
+            font-weight: 700;
+            border: 2px solid white;
+            text-decoration: none;
+            transition: background-color linear 0.3s;
+        }
+
+        .button-sign:hover {
+            background-color: #3e5c5d;
+            color: #ffffff;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            text-shadow: 0px 0px 8px rgba(255, 255, 255, 1);
+            text-align: center;
+            background: url('Assets/mask-2.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: float linear 1s;
+            margin-top: 70px;
+        }
+
+        .price-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 50px 20px;
+            background-color: rgb(0, 0, 0);
+            color: white;
+        }
+
+        .section h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            background: url('Assets/mask-2.jpg');
+            background-clip: text;
+            background-position: center;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .price-benefits {
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        .price-benefits h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            background: url('Assets/mask-2.jpg');
+            background-clip: text;
+            background-position: center;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .pricing-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: nowrap; /* Prevent wrapping to keep cards in one line */
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background-color: #111;
+            border-radius: 15px;
+            padding: 40px;
+            width: 300px; /* Fixed width to ensure consistency */
+            flex: 0 0 300px; /* Prevent cards from shrinking or growing */
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #333;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 247, 255, 0.2);
+        }
+
+        .pricing-card.featured {
+            border: 2px solid #00f7ff;
+            box-shadow: 0 0 15px rgba(0, 247, 255, 0.3);
+        }
+
+        .pricing-card h3 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            text-align: center;
+            font-family: 'Chakra Petch', sans-serif;
+        }
+
+        .pricing-card .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #00f7ff;
+        }
+
+        .pricing-card .price .currency {
+            font-size: 1.5rem;
+            vertical-align: super;
+        }
+
+        .pricing-card .price .period {
+            font-size: 1rem;
+            color: #aaa;
+            font-weight: normal;
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .pricing-card ul li {
+            padding: 10px 0;
+            border-bottom: 1px solid #333;
+            display: flex;
+            align-items: center;
+        }
+
+        .pricing-card ul li::before {
+            content: "✓";
+            color: #00f7ff;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .pricing-card .cta-button {
+            display: block;
+            width: 100%;
+            background-color: #00f7ff;
+            color: #000;
+            text-align: center;
+            padding: 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .pricing-card .cta-button:hover {
+            background-color: #b6fff3;
+        }
+
+        .pricing-card .cta-button.outline {
+            background-color: transparent;
+            border: 2px solid #00f7ff;
+            color: #00f7ff;
+        }
+
+        .pricing-card .cta-button.outline:hover {
+            background-color: rgba(0, 247, 255, 0.1);
+        }
+
+        .comparison-table {
+            width: 100%;
+            max-width: 1000px;
+            margin: 50px auto;
+            border-collapse: collapse;
+            background-color: #111;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .comparison-table th, .comparison-table td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #333;
+        }
+
+        .comparison-table th {
+            background-color: #222;
+            font-weight: bold;
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table .feature-name {
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .comparison-table .check {
+            color: #00f7ff;
+            font-size: 1.2rem;
+        }
+
+        .comparison-table .cross {
+            color: #ff5252;
+        }
+
+    
+        .guarantees {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .guarantee-item {
+            text-align: center;
+            max-width: 300px;
+        }
+
+        .guarantee-item img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+        }
+
+        .guarantee-item h4 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(to right, #000, #111, #000);
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-button, .cta-button-large, .cta-button-outline {
+            box-sizing: border-box;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .cta-button-large:hover {
+            background-color: #b6fff3;
+        }
+
+        .cta-button-outline {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: transparent;
+            color: #00f7ff;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            border: 2px solid #00f7ff;
+            transition: background-color 0.3s;
+        }
+
+        .cta-button-outline:hover {
+            background-color: rgba(0, 247, 255, 0.1);
+        }
+
+        footer {
+            background-color: #161313;
+            color: white;
+            box-shadow: 0 0 10px white;
+            text-align: center;
+            padding: 30px;
+        }
+
+        footer a {
+            color: cyan;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: #b6fff3;
+        }
+
+        @keyframes float {
+            0% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        #scrollUpBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: #4a4a4a;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            transition: opacity 0.3s, transform 0.3s;
+            opacity: 0;
+            transform: scale(0);
+        }
+
+        #scrollUpBtn.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #00f7ff;
+            color: #000;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .badge.red {
+            background-color: #ff5252;
+        }
+
+        .hide-desktop {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: none;
+        }
+
+        @media (max-width: 1000px) {
+            .pricing-container {
+                flex-wrap: wrap; /* Allow wrapping on smaller screens */
+                justify-content: center;
+            }
+
+            .pricing-card {
+                width: 80%;
+                max-width: 350px;
+                flex: 0 0 auto; /* Allow cards to take their natural width */
+            }
+
+            .comparison-table {
+                font-size: 0.9rem;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .price-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .hide-desktop {
+                display: inline-block;
+            }
+
+            header {
+                padding: 15px 10px;
+            }
+
+            .header-logo {
+                font-size: 1.8rem;
+            }
+
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: rgba(0, 0, 0, 0.9);
+                padding: 20px 0;
+                z-index: 100;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+
+            .hide-mobile {
+                display: none;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .pricing-card {
+                width: 90%;
+                padding: 20px;
+            }
+
+            .comparison-table th, .comparison-table td {
+                padding: 10px 5px;
+                font-size: 0.8rem;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .cta-button-large, .cta-button-outline {
+                padding: 12px 20px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="section">
+        <div class="price-benefits">
+            <h1>Why Choose Learn.AI?</h1>
+            <p>Our pricing plans are designed to give you the best value for your AI education investment. With Learn.AI, you'll get access to cutting-edge AI courses, personalized learning paths, and a supportive community of fellow learners.</p>
+        </div>
+
+        <div class="pricing-container">
+            <div class="pricing-card">
+                <h3>Basic Plan</h3>
+                <div class="price">
+                    <span class="currency">$</span>0<span class="period">/lifetime</span>
+                </div>
+                <p>Perfect for beginners looking to explore AI fundamentals.</p>
+                <a href="signup.html" class="cta-button outline">Get Started Free</a>
+            </div>
+
+            <div class="pricing-card featured">
+                <h3>Pro Plan</h3>
+                <div class="price">
+                    <span class="currency">$</span>29<span class="period">/month</span>
+                </div>
+                <p>Ideal for serious learners committed to mastering AI.</p>
+                <a href="signup.html" class="cta-button">Subscribe Now</a>
+            </div>
+
+            <div class="pricing-card">
+                <h3>Elite Plan</h3>
+                <div class="price">
+                    <span class="currency">$</span>99<span class="period">/one-time</span>
+                </div>
+                <p>For serious AI enthusiasts who want lifetime access.</p>
+                <a href="signup.html" class="cta-button">Get Lifetime Access</a>
+            </div>
+        </div>
+
+        <h2 style="margin-top: 80px;">Plan Comparison</h2>
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Basic</th>
+                    <th>Pro</th>
+                    <th>Elite</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="feature-name">Beginner AI Courses</td>
+                    <td class="check">✓</td>
+                    <td class="check">✓</td>
+                    <td class="check">✓</td>
+                </tr>
+                <tr>
+                    <td class="feature-name">Advanced AI Courses</td>
+                    <td class="cross">✗</td>
+                    <td class="check">✓</td>
+                    <td class="check">✓</td>
+                </tr>
+                <tr>
+                    <td class="feature-name">Machine Learning Courses</td>
+                    <td class="cross">✗</td>
+                    <td class="check">✓</td>
+                    <td class="check">✓</td>
+                </tr>
+                <tr>
+                    <td class="feature-name">Deep Learning Courses</td>
+                    <td class="cross">✗</td>
+                    <td class="check">✓</td>
+                    <td class="check">✓</td>
+                </tr>
+                <tr>
+                    <td class="feature-name">NLP Courses</td>
+                    <td class="cross">✗</td>
+                    <td class="check">✓</td>
+                    <td class="check">✓</td>
+                </tr>
+                <tr>
+                    <td class="feature-name">Generative AI Courses</td>
+                    <td class="cross">✗</td>
+                    <td class="check">✓</td>
+                    <td class="check">✓</td>
+                </tr>
+                <tr>
+                    <td class="feature-name">Hands-on Projects</td>
+                    <td class="cross">✗</td>
+                    <td class="check">✓</td>
+                    <td class="check">✓</td>
+                </tr>
+                <tr>
+                    <td class="feature-name">24/7 AI Mentor Support</td>
+                    <td class="cross">✗</td>
+                    <td class="check">✓</td>
+                    <td class="check">✓</td>
+                </tr>
+                <tr>
+                    <td class="feature-name">Personalized Learning Path</td>
+                    <td class="cross">✗</td>
+                    <td class="check">✓</td>
+                    <td class="check">✓</td>
+                </tr>
+                <tr>
+                    <td class="feature-name">Job Placement Assistance</td>
+                    <td class="cross">✗</td>
+                    <td class="cross">✗</td>
+                    <td class="check">✓</td>
+                </tr>
+                <tr>
+                    <td class="feature-name">Industry Networking Events</td>
+                    <td class="cross">✗</td>
+                    <td class="cross">✗</td>
+                    <td class="check">✓</td>
+                </tr>
+                <tr>
+                    <td class="feature-name">Access Duration</td>
+                    <td>Limited</td>
+                    <td>Monthly</td>
+                    <td>Lifetime</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <section class="cta-section">
+            <h2>Ready to Start Your AI Learning Journey?</h2>
+            <p>Choose the plan that fits your needs and take the first step towards mastering AI today.</p>
+            <div class="cta-buttons">
+                <a href="index.html#services" class="cta-button-outline">Explore Courses</a>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2025 Learn.AI - All rights reserved.</p>
+            <div>
+                <a href="index.html">Home</a> |
+                <a href="contact.html">Contact Us</a> |
+                <a href="centre.html">Find Nearest Centre</a> |
+                <a href="#">Instagram</a> |
+                <a href="#">LinkedIn</a>
+            </div>
+        </footer>
+
+        <button id="scrollUpBtn"><img src="Assets/up.svg" alt="Scroll Up"></button>
+    </section>
+
+    <script>
+
+        // Scroll to top button
+        window.addEventListener('scroll', function() {
+            const scrollUpBtn = document.getElementById('scrollUpBtn');
+            if (window.pageYOffset > 300) {
+                scrollUpBtn.classList.add('show');
+            } else {
+                scrollUpBtn.classList.remove('show');
+            }
+        });
+
+        document.getElementById('scrollUpBtn').addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>

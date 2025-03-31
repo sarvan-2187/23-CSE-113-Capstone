@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn.AI Dashboard</title>
+    <link rel="icon" href="Assets/Logo.png">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #121212;
+            --card-dark: #1E1E1E;
+            --text-light: #e0e0e0;
+            --accent-cyan: #00E5FF;
+            --accent-dark-cyan: #00B0FF;
+            --accent-gray: #2C2C2C;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header Styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            background: linear-gradient(to right, #00B0FF, #00E5FF);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .icon-badge {
+            background-color: var(--accent-cyan);
+            color: var(--bg-dark);
+            border-radius: 50%;
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background-color: var(--card-dark);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transition: border-color 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .accent-text {
+            color: var(--accent-cyan);
+        }
+
+        /* Progress Bars */
+        .progress-container {
+            background-color: #2C2C2C;
+            border-radius: 1rem;
+            height: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .progress-bar {
+            background: linear-gradient(to right, var(--accent-cyan), var(--accent-dark-cyan));
+            height: 100%;
+            border-radius: 1rem;
+            transition: width 0.5s ease;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .action-button {
+            background-color: var(--accent-cyan);
+            color: var(--bg-dark);
+            border: none;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .action-button:hover {
+            opacity: 0.9;
+            box-shadow: 0 5px 15px rgba(0, 229, 255, 0.4);
+        }
+
+        .secondary-button {
+            background-color: var(--accent-gray);
+            color: var(--text-light);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            /* Ensure full-width grid and specific card layouts for mobile */
+            .dashboard-grid .card {
+                width: 100%;
+            }
+
+            /* Special handling for learning progress card */
+            .dashboard-grid .card:first-child {
+                grid-column: 1 / -1;
+            }
+
+            .card-title {
+                font-size: 1.1rem;
+            }
+
+            .progress-info span {
+                font-size: 0.9rem;
+            }
+
+            .accent-text {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 2rem;
+            }
+
+            .card-title {
+                font-size: 1rem;
+            }
+
+            .action-button {
+                font-size: 0.9rem;
+                padding: 0.5rem;
+            }
+
+            .progress-info span {
+                font-size: 0.8rem;
+            }
+
+            .accent-text {
+                font-size: 1rem;
+            }
+
+            /* Further optimize for very small screens */
+            .card {
+                padding: 1rem;
+            }
+
+            .card-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div>
+                <h1 class="logo">Learn.AI</h1>
+                <p style="color: #888;">Your Personal Learning Journey</p>
+            </div>
+            <div class="user-profile">
+                <div class="icon-badge">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div>
+                    <h3>Dheeraj</h3>
+                    <p style="color: #888; font-size: 0.8rem;">Student</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="dashboard-grid">
+            <!-- Learning Progress -->
+            <div class="card" style="grid-column: span 2;">
+                <div class="card-header">
+                    <h2 class="card-title">Learning Progress</h2>
+                    <span class="accent-text">2025</span>
+                </div>
+                <canvas id="learningProgressChart"></canvas>
+            </div>
+
+            <!-- Current Courses -->
+            <div class="card" style="grid-column: span 2;">
+                <div class="card-header">
+                    <h2 class="card-title">My Courses</h2>
+                    <i class="fas fa-graduation-cap accent-text"></i>
+                </div>
+                <div>
+                    <div>
+                        <div class="progress-info">
+                            <span>Generative AI</span>
+                            <span class="accent-text">0%</span>
+                        </div>
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <div class="progress-info">
+                            <span>Working with LLMs</span>
+                            <span class="accent-text">85%</span>
+                        </div>
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: 85%"></div>
+                        </div>
+                        <div style="margin-top: 1rem;"></div>
+                        <div class="progress-info">
+                            <span>AI in Web Development</span>
+                            <span class="accent-text">100%</span>
+                        </div>
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: 100%"></div>
+                        </div>
+                        <div style="margin-top: 1rem;"></div>
+                        <div class="progress-info">
+                            <span>Python Programming</span>
+                            <span class="accent-text">100%</span>
+                        </div>
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="card quick-actions" style="grid-column: span 2;">
+                <h2 class="card-title">Quick Actions</h2>
+                <button class="action-button">
+                    <i class="fas fa-download"></i>
+                    Download Certificates
+                </button>
+                <button class="action-button secondary-button" onclick="window.location='quiz.html'">
+                    <i class="fas fa-book-open"></i>
+                    Take Quiz
+                </button>
+                <button class="action-button" onclick="document.location='gen-ai.html'">
+                    <i class="fas fa-book-open"></i>
+                    Continue Learning
+                </button>
+                <button class="action-button secondary-button">
+                    <i class="fas fa-book-open"></i>
+                    Resume Project Work
+                </button>
+            </div>
+
+            <!-- Learning Stats -->
+            <div class="card" style="grid-column: span 2;">
+                <div class="card-header">
+                    <h2 class="card-title">Learning Stats</h2>
+                    <i class="fas fa-chart-line accent-text"></i>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div>
+                        <div class="accent-text" style="font-size: 1.5rem; font-weight: bold;">125</div>
+                        <div style="color: #888; font-size: 0.9rem;">Hours Studied</div>
+                    </div>
+                    <div>
+                        <div class="accent-text" style="font-size: 1.5rem; font-weight: bold;">3</div>
+                        <div style="color: #888; font-size: 0.9rem;">Certificates</div>
+                    </div>
+
+                    <div>
+                        <div class="accent-text" style="font-size: 1.5rem; font-weight: bold;">7</div>
+                        <div style="color: #888; font-size: 0.9rem;">Technologies Learnt</div>
+                    </div>
+                    <div style="margin-top: 1rem;"></div>
+                    <div>
+                        <div class="accent-text" style="font-size: 1.5rem; font-weight: bold;">5</div>
+                        <div style="color: #888; font-size: 0.9rem;">Projects</div>
+                    </div>
+                    <div>
+                        <div class="accent-text" style="font-size: 1.5rem; font-weight: bold;">2</div>
+                        <div style="color: #888; font-size: 0.9rem;">Quizzes</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('learningProgressChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Learning Hours',
+                    data: [10, 25, 35, 45, 55, 65],
+                    borderColor: '#00E5FF',
+                    backgroundColor: 'rgba(0, 229, 255, 0.1)',
+                    tension: 0.4,
+                    pointBackgroundColor: '#00E5FF',
+                    pointRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(255,255,255,0.1)' },
+                        ticks: { color: '#e0e0e0' }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#e0e0e0' }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

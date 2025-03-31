@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Quiz</title>
+    <link rel="icon" href="Assets/Logo.png">
+    <style>
+        body{
+            background-color: black;
+            color: white;
+        }
+
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            font-family: sans-serif;
+        }
+        #quiz {
+            border: 1px solid #1dfff0;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        #submit {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border-radius:5px;
+            background-color: #4ca8af;
+            color: rgb(0, 0, 0);
+            border: none;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            color: cyan;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Artificial Intelligence Quiz</h1>
+        <div id="quiz">
+            <p>1. Who is the inventor of Artificial Intelligence? <span style='color:rgb(0, 255, 255);'>1 Point</span></p>
+            <input type="radio" id="q1a" name="q1" value="Geoffrey Hinton"> <label for="q1a">Geoffrey Hinton</label><br>
+            <input type="radio" id="q1b" name="q1" value="Andrew Ng"> <label for="q1b">Andrew Ng</label><br>
+            <input type="radio" id="q1c" name="q1" value="John McCarthy"> <label for="q1c">John McCarthy</label><br>
+            <input type="radio" id="q1d" name="q1" value="Jürgen Schmidhuber"> <label for="q1d">Jürgen Schmidhuber</label><br>
+            <br>
+            <p>2. Which of the following is the branch of Artificial Intelligence? <span style='color:rgb(0, 255, 255);'>1 Point</span></p>
+            <input type="radio" id="q2a" name="q2" value="Machine Learning"> <label for="q2a">Machine Learning</label><br>
+            <input type="radio" id="q2b" name="q2" value="Cyber Forensics"> <label for="q2b">Cyber Forensics</label><br>
+            <input type="radio" id="q2c" name="q2" value="Full-stack Developer"> <label for="q2c">Full-stack Developer</label><br>
+            <input type="radio" id="q2d" name="q2" value="Network Design"> <label for="q2d">Network Design</label><br>
+            <br>
+            <p>3. What is the goal of Artificial Intelligence? <span style='color:rgb(0, 255, 255);'>1 Point</span></p>
+            <input type="radio" id="q3a" name="q3" value="To solve artificial problems"> <label for="q3a">To solve artificial problems</label><br>
+            <input type="radio" id="q3b" name="q3" value="To extract scientific causes"> <label for="q3b">To extract scientific causes</label><br>
+            <input type="radio" id="q3c" name="q3" value="To explain various sorts of intelligence"> <label for="q3c">To explain various sorts of intelligence</label><br>
+            <input type="radio" id="q3d" name="q3" value="To solve real-world problems"> <label for="q3d">To solve real-world problems</label><br>
+            <br>
+            <p>4. Who is current Civil Aviation Minister of India? <span style='color:rgb(0, 255, 255);'>1 Point</span></p>
+            <input type="radio" id="q4a" name="q4" value="Abhinaya"> <label for="q4a">Abhinaya</label><br>
+            <input type="radio" id="q4b" name="q4" value="Jaishankar"> <label for="q4b">Jaishankar</label><br>
+            <input type="radio" id="q4c" name="q4" value="Rammohan Naidu"> <label for="q4c">Rammohan Naidu</label><br>
+            <input type="radio" id="q4d" name="q4" value="Sai Kumar"> <label for="q4d">Sai Kumar</label><br>
+            <br>
+            <p>5. Who is current Jal Shakti Minister of India? <span style='color:rgb(0, 255, 255);'>1 Point</span></p>
+            <input type="radio" id="q5a" name="q5" value="Jayadev Unadkat"> <label for="q5a">Jayadev Unadkat</label><br>
+            <input type="radio" id="q5b" name="q5" value="C R Patil"> <label for="q5b">C R Patil</label><br>
+            <input type="radio" id="q5c" name="q5" value="Sai Kumar"> <label for="q5c">Sai Kumar</label><br>
+            <input type="radio" id="q5d" name="q5" value="Jayavardhan"> <label for="q5d">Jayavardhan</label><br>
+            <br>
+        </div>
+        <button id="submit" onclick="document.location='confirmation.html'">Submit</button>
+        <div id="result"></div>
+    </div>
+</body>
+</html>
