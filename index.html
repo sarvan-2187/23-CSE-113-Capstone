@@ -510,12 +510,11 @@
             transform: scale(1);
         }
 
-        /* Add these responsive grid styles with animations to your existing CSS */
         .grid {
           display: grid;
           width: 100%;
           grid-template-columns: repeat(4, 1fr);
-          grid-template-rows: repeat(4, minmax(150px, auto));
+          grid-template-rows: repeat(4, minmax(100px, auto));
           gap: 16px;
           background-color: #000000;
           padding: 8px;
@@ -536,14 +535,12 @@
           transition: transform 0.5s ease, box-shadow 0.5s ease;
         }
 
-        /* Hover effects for grid items (keeping this for the lift effect) */
         .grid-item:hover {
           transform: translateY(-5px);
           box-shadow: 0 10px 20px rgba(0, 255, 255, 0.2);
           z-index: 1;
         }
 
-        /* Text styles - now without the hover dependency */
         .grid-item p {
           color: white;
           font-family: 'Poppins', sans-serif;
@@ -551,19 +548,16 @@
           text-align: center;
           text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
           padding: 10px;
-          /* Initial state - will be animated on view */
           opacity: 0;
           transform: translateY(20px);
           transition: opacity 0.6s ease, transform 0.6s ease;
         }
 
-        /* Text animation on view instead of hover */
         .grid-item.in-view p {
           opacity: 1;
           transform: translateY(0);
         }
 
-        /* Individual item animations on scroll */
         .grid-item {
           opacity: 0;
           animation-duration: 0.8s;
@@ -600,13 +594,11 @@
           animation-delay: 0.6s;
         }
 
-        /* Animation timing for view-based animations */
         .animate-on-scroll {
           animation-timeline: view();
           animation-range: entry 0% cover 25%;
         }
 
-        /* Keyframes for animations */
         @keyframes fadeInLeft {
           from {
             opacity: 0;
@@ -662,7 +654,6 @@
           }
         }
 
-        /* Add subtle shimmer effect to grid items */
         .grid-item::before {
           content: '';
           position: absolute;
@@ -691,7 +682,7 @@
         @media (max-width: 1024px) {
           .grid {
             grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: repeat(6, minmax(120px, auto));
+            grid-template-rows: repeat(6, minmax(150px, auto));
           }
           
           .grid-item p {
@@ -730,16 +721,25 @@
         }
 
         @media (max-width: 768px) {
+          .main{
+            background: url(Assets/AI-2.png);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+          }
+
           .grid {
             grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: repeat(8, minmax(100px, auto));
-            margin: 0 1rem;
+            grid-template-rows: repeat(8, minmax(150px, auto));
+            margin: 0; 
+            width: 100%; 
+            padding: 8px; 
           }
           
           .grid-item p {
             font-size: 2rem;
           }
-          
+
           .ai-item {
             grid-column: span 2 !important;
             grid-row: span 1 !important;
@@ -774,7 +774,24 @@
         @media (max-width: 480px) {
           .grid {
             grid-template-columns: 1fr;
-            grid-template-rows: repeat(6, minmax(100px, auto));
+            grid-template-rows: repeat(6, minmax(150px, auto));
+            gap: 12px;
+            padding: 6px;
+            width: 100%; 
+            margin: 0; 
+          }
+          
+          .container {
+            padding: 0 !important;
+            margin: 0 !important;
+            width: 100% !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .grid {
+            grid-template-columns: 1fr;
+            grid-template-rows: repeat(6, minmax(150px, auto));
             gap: 12px;
             padding: 6px;
           }
@@ -814,6 +831,33 @@
             width: 0;
         }
 
+        .container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.grid {
+    margin: 2rem;
+    width: calc(100% - 4rem);
+}
+
+/* Update media queries */
+@media (max-width: 768px) {
+    .grid {
+        margin: 1rem;
+        width: calc(100% - 2rem);
+    }
+}
+
+@media (max-width: 480px) {
+    .grid {
+        margin: 0.5rem;
+        width: calc(100% - 1rem);
+    }
+}
+
     </style>
 </head>
 <body>
@@ -823,6 +867,7 @@
         <nav>
             <ul>
                 <li><a href="#why-ai">Why Us?</a></li>
+                <li><a href="#services">Courses</a></li>
                 <li><a href="payments.html">Pricing</a></li>
                 <li><a href="#about">About Us</a></li>
                 <li class="hide-desktop"><a href="signup.html" class="button-sign">Signup</a></li>
@@ -833,16 +878,15 @@
 
     <section class="hero">
         <h1></h1>
-        <p>Learn AI Smarter, faster, better!</p>
+        <p></p>
         <a href="options.html" class="button-sign">Get Started</a>
     </section>
     
     </div>
 
     <section id="why-ai" class="section">
-        <h2 style="animation: float linear 1s; animation-timeline: view();">The Future is Now AI</h2>
-        <div class="container" style="display: flex; height: 100%; width: 100%; align-items: center; justify-content: center;">
-            <div class="grid" style="margin: 0 5rem;">
+        <div class="container">
+            <div class="grid">
               
               <div class="grid-item ai-item animate-on-scroll" style="grid-column: span 2; grid-row: span 1; background-image: url('https://www.zdnet.com/a/img/resize/ada36a8ca094a512f972578b7b4742f38ac90b5c/2024/05/28/95683789-ebda-4272-964e-ce5d1a5a000f/gettyimages-1888972727.jpg?auto=webp&width=1280');">
                 <p>Artificial Intelligence</p>

@@ -524,6 +524,42 @@
                 height: 20px;
             }
         }
+
+/* Form validation styles */
+.error-message {
+    color: #ff6b6b;
+    font-size: 0.8rem;
+    margin-top: 5px;
+    transition: all 0.3s ease;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px rgba(0, 247, 255, 0.3);
+}
+
+input.invalid, select.invalid {
+    border-color: #ff6b6b;
+    background-color: rgba(255, 107, 107, 0.05);
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 20px; /* Increased to allow space for error messages */
+}
+
+/* Animation for error messages */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.shake {
+    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
     </style>
 </head>
 <body>
@@ -708,8 +744,414 @@
     <button id="scrollUpBtn"><img src="Assets/up.svg" alt="Scroll Up"></button>
 
     <script>
+// Form validation function
+function validateForm() {
+    let isValid = true;
+    const errors = {};
+    
+    // Get form fields
+    const email = document.getElementById('email');
+    const firstName = document.getElementById('firstName');
+    const lastName = document.getElementById('lastName');
+    const billingAddress = document.getElementById('billingAddress');
+    const city = document.getElementById('city');
+    const zipCode = document.getElementById('zipCode');
+    const country = document.getElementById('country');
+    const state = document.getElementById('state');
+    
+    // Basic field validation (required fields)
+    const requiredFields = [
+        { field: email, name: 'email' },
+        { field: firstName, name: 'firstName' },
+        { field: lastName, name: 'lastName' },
+        { field: billingAddress, name: 'billingAddress' },
+        { field: city, name: 'city' },
+        { field: zipCode, name: 'zipCode' },
+        { field: country, name: 'country' },
+        { field: state, name: 'state' }
+    ];
+    
+    requiredFields.forEach(item => {
+        if (!item.field.value.trim()) {
+            isValid = false;
+            showError(item.field, 'This field is required');
+            errors[item.name] = 'Required';
+        } else {
+            removeError(item.field);
+        }
+    });
+    
+    // Email validation
+    if (email.value.trim()) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email.value.trim())) {
+            isValid = false;
+            showError(email, 'Please enter a valid email address');
+            errors.email = 'Invalid format';
+        }
+    }
+    
+    // Validate payment method specific fields
+    const selectedPaymentMethod = document.querySelector('.payment-method.selected');
+    if (selectedPaymentMethod) {
+        const paymentType = selectedPaymentMethod.textContent.trim().includes('Credit Card') ? 'card' : 
+                          selectedPaymentMethod.textContent.trim().includes('Apple Pay') ? 'apple' : 'payTM';
+        
+        if (paymentType === 'card') {
+            const cardNumber = document.getElementById('cardNumber');
+            const expiryDate = document.getElementById('expiryDate');
+            const cvv = document.getElementById('cvv');
+            
+            // Card number validation (16 digits, can have spaces)
+            if (!cardNumber.value.trim()) {
+                isValid = false;
+                showError(cardNumber, 'Card number is required');
+                errors.cardNumber = 'Required';
+            } else {
+                // Remove spaces and check if it's 16 digits
+                const cleanCardNumber = cardNumber.value.replace(/\s/g, '');
+                if (!/^\d{16}$/.test(cleanCardNumber)) {
+                    isValid = false;
+                    showError(cardNumber, 'Card number must be 16 digits');
+                    errors.cardNumber = 'Invalid format';
+                } else {
+                    removeError(cardNumber);
+                }
+            }
+            
+            // Expiry date validation (MM/YY format)
+            if (!expiryDate.value.trim()) {
+                isValid = false;
+                showError(expiryDate, 'Expiry date is required');
+                errors.expiryDate = 'Required';
+            } else {
+                if (!/^(0[1-9]|1[0-2])\/([0-9]{2})$/.test(expiryDate.value.trim())) {
+                    isValid = false;
+                    showError(expiryDate, 'Use format MM/YY (e.g., 12/25)');
+                    errors.expiryDate = 'Invalid format';
+                } else {
+                    // Check if card is expired
+                    const [month, year] = expiryDate.value.split('/');
+                    const expiryMonth = parseInt(month);
+                    const expiryYear = parseInt('20' + year);
+                    
+                    const today = new Date();
+                    const currentMonth = today.getMonth() + 1; // JS months are 0-indexed
+                    const currentYear = today.getFullYear();
+                    
+                    if (expiryYear < currentYear || (expiryYear === currentYear && expiryMonth < currentMonth)) {
+                        isValid = false;
+                        showError(expiryDate, 'Card has expired');
+                        errors.expiryDate = 'Expired';
+                    } else {
+                        removeError(expiryDate);
+                    }
+                }
+            }
+            
+            // CVV validation (3-4 digits)
+            if (!cvv.value.trim()) {
+                isValid = false;
+                showError(cvv, 'CVV is required');
+                errors.cvv = 'Required';
+            } else {
+                if (!/^[0-9]{3,4}$/.test(cvv.value.trim())) {
+                    isValid = false;
+                    showError(cvv, 'CVV must be 3-4 digits');
+                    errors.cvv = 'Invalid format';
+                } else {
+                    removeError(cvv);
+                }
+            }
+        } else if (paymentType === 'apple') {
+            const applePayId = document.getElementById('applePayId');
+            
+            if (!applePayId.value.trim()) {
+                isValid = false;
+                showError(applePayId, 'Apple Pay ID is required');
+                errors.applePayId = 'Required';
+            } else {
+                removeError(applePayId);
+            }
+        } else if (paymentType === 'payTM') {
+            const upiId = document.getElementById('upiId');
+            const upiPin = document.getElementById('upiPin');
+            
+            // UPI ID validation
+            if (!upiId.value.trim()) {
+                isValid = false;
+                showError(upiId, 'UPI ID is required');
+                errors.upiId = 'Required';
+            } else {
+                // Basic UPI ID format validation
+                if (!/^[\w.-]+@[\w.-]+$/.test(upiId.value.trim())) {
+                    isValid = false;
+                    showError(upiId, 'Enter a valid UPI ID (e.g., name@upi)');
+                    errors.upiId = 'Invalid format';
+                } else {
+                    removeError(upiId);
+                }
+            }
+            
+            // UPI PIN validation (Numbers only)
+            if (!upiPin.value.trim()) {
+                isValid = false;
+                showError(upiPin, 'UPI PIN is required');
+                errors.upiPin = 'Required';
+            } else {
+                if (!/^\d{4,6}$/.test(upiPin.value.trim())) {
+                    isValid = false;
+                    showError(upiPin, 'PIN must be 4-6 digits');
+                    errors.upiPin = 'Invalid format';
+                } else {
+                    removeError(upiPin);
+                }
+            }
+        }
+    }
+    
+    // ZIP/PIN code validation (depends on country)
+    if (zipCode.value.trim()) {
+        const countryValue = country.value;
+        if (countryValue === 'in') {
+            // Indian PIN code: 6 digits
+            if (!/^\d{6}$/.test(zipCode.value.trim())) {
+                isValid = false;
+                showError(zipCode, 'Indian PIN codes must be 6 digits');
+                errors.zipCode = 'Invalid format';
+            } else {
+                removeError(zipCode);
+            }
+        } else if (countryValue === 'us') {
+            // US ZIP code: 5 digits or 5+4
+            if (!/^\d{5}(-\d{4})?$/.test(zipCode.value.trim())) {
+                isValid = false;
+                showError(zipCode, 'US ZIP codes must be 5 digits or 5+4 format');
+                errors.zipCode = 'Invalid format';
+            } else {
+                removeError(zipCode);
+            }
+        } else {
+            // Generic validation for other countries
+            if (zipCode.value.trim().length < 3 || zipCode.value.trim().length > 10) {
+                isValid = false;
+                showError(zipCode, 'ZIP/Postal code must be 3-10 characters');
+                errors.zipCode = 'Invalid format';
+            } else {
+                removeError(zipCode);
+            }
+        }
+    }
+    
+    return { isValid, errors };
+}
 
+// Helper function to show error
+function showError(input, message) {
+    // Remove existing error if any
+    removeError(input);
+    
+    // Create error element
+    const errorElement = document.createElement('div');
+    errorElement.className = 'error-message';
+    errorElement.textContent = message;
+    errorElement.style.color = '#ff6b6b';
+    errorElement.style.fontSize = '0.8rem';
+    errorElement.style.marginTop = '5px';
+    
+    // Add red border to input
+    input.style.borderColor = '#ff6b6b';
+    
+    // Insert error after input
+    input.parentNode.insertBefore(errorElement, input.nextSibling);
+}
+
+// Helper function to remove error
+function removeError(input) {
+    // Reset input style
+    input.style.borderColor = '';
+    
+    // Find and remove error message if it exists
+    const parent = input.parentNode;
+    const errorElement = parent.querySelector('.error-message');
+    if (errorElement) {
+        parent.removeChild(errorElement);
+    }
+}
+
+// Real-time validation for common fields
+document.addEventListener('DOMContentLoaded', function() {
+    const email = document.getElementById('email');
+    const cardNumber = document.getElementById('cardNumber');
+    const expiryDate = document.getElementById('expiryDate');
+    const cvv = document.getElementById('cvv');
+    const zipCode = document.getElementById('zipCode');
+    
+    // Email validation
+    email.addEventListener('blur', function() {
+        if (this.value.trim()) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(this.value.trim())) {
+                showError(this, 'Please enter a valid email address');
+            } else {
+                removeError(this);
+            }
+        }
+    });
+    
+    // Card number formatting and validation
+    if (cardNumber) {
+        cardNumber.addEventListener('input', function() {
+            // Format: add space after every 4 digits
+            let value = this.value.replace(/\s/g, '');
+            if (value.length > 0) {
+                value = value.match(new RegExp('.{1,4}', 'g')).join(' ');
+            }
+            this.value = value;
+            
+            // Limit to 19 characters (16 digits + 3 spaces)
+            if (this.value.length > 19) {
+                this.value = this.value.slice(0, 19);
+            }
+        });
+        
+        cardNumber.addEventListener('blur', function() {
+            if (this.value.trim()) {
+                const cleanCardNumber = this.value.replace(/\s/g, '');
+                if (!/^\d{16}$/.test(cleanCardNumber)) {
+                    showError(this, 'Card number must be 16 digits');
+                } else {
+                    removeError(this);
+                }
+            }
+        });
+    }
+    
+    // Expiry date formatting and validation
+    if (expiryDate) {
+        expiryDate.addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, '');
+            if (value.length > 0) {
+                if (value.length <= 2) {
+                    this.value = value;
+                } else {
+                    this.value = value.slice(0, 2) + '/' + value.slice(2, 4);
+                }
+            }
+            
+            // Limit to 5 characters (MM/YY)
+            if (this.value.length > 5) {
+                this.value = this.value.slice(0, 5);
+            }
+            
+            // Auto-correct month if > 12
+            if (value.length >= 2) {
+                let month = parseInt(value.slice(0, 2));
+                if (month > 12) {
+                    this.value = '12' + this.value.slice(2);
+                } else if (month === 0) {
+                    this.value = '01' + this.value.slice(2);
+                }
+            }
+        });
+        
+        expiryDate.addEventListener('blur', function() {
+            if (this.value.trim()) {
+                if (!/^(0[1-9]|1[0-2])\/([0-9]{2})$/.test(this.value.trim())) {
+                    showError(this, 'Use format MM/YY (e.g., 12/25)');
+                } else {
+                    const [month, year] = this.value.split('/');
+                    const expiryMonth = parseInt(month);
+                    const expiryYear = parseInt('20' + year);
+                    
+                    const today = new Date();
+                    const currentMonth = today.getMonth() + 1;
+                    const currentYear = today.getFullYear();
+                    
+                    if (expiryYear < currentYear || (expiryYear === currentYear && expiryMonth < currentMonth)) {
+                        showError(this, 'Card has expired');
+                    } else {
+                        removeError(this);
+                    }
+                }
+            }
+        });
+    }
+    
+    // CVV validation
+    if (cvv) {
+        cvv.addEventListener('input', function() {
+            // Restrict to numbers only
+            this.value = this.value.replace(/\D/g, '');
+            
+            // Limit to 4 digits
+            if (this.value.length > 4) {
+                this.value = this.value.slice(0, 4);
+            }
+        });
+        
+        cvv.addEventListener('blur', function() {
+            if (this.value.trim()) {
+                if (!/^[0-9]{3,4}$/.test(this.value.trim())) {
+                    showError(this, 'CVV must be 3-4 digits');
+                } else {
+                    removeError(this);
+                }
+            }
+        });
+    }
+    
+    // ZIP/PIN code validation based on country
+    zipCode.addEventListener('blur', function() {
+        if (this.value.trim()) {
+            const countryValue = document.getElementById('country').value;
+            
+            if (countryValue === 'in') {
+                if (!/^\d{6}$/.test(this.value.trim())) {
+                    showError(this, 'Indian PIN codes must be 6 digits');
+                } else {
+                    removeError(this);
+                }
+            } else if (countryValue === 'us') {
+                if (!/^\d{5}(-\d{4})?$/.test(this.value.trim())) {
+                    showError(this, 'US ZIP codes must be 5 digits or 5+4 format');
+                } else {
+                    removeError(this);
+                }
+            } else {
+                if (this.value.trim().length < 3 || this.value.trim().length > 10) {
+                    showError(this, 'ZIP/Postal code must be 3-10 characters');
+                } else {
+                    removeError(this);
+                }
+            }
+        }
+    });
+    
+    // Country change should trigger PIN validation
+    document.getElementById('country').addEventListener('change', function() {
+        if (zipCode.value.trim()) {
+            // Trigger the blur event to validate based on new country
+            const event = new Event('blur');
+            zipCode.dispatchEvent(event);
+        }
+    });
+    
+    // Submit form validation
     document.querySelector('.checkout-button').addEventListener('click', function(e) {
+        const { isValid, errors } = validateForm();
+        
+        if (!isValid) {
+            e.preventDefault();
+            // Scroll to the first error
+            const firstError = document.querySelector('.error-message');
+            if (firstError) {
+                firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            return false;
+        }
+        
+        // Continue with your existing form submission code
         e.preventDefault();
         
         const selectedPlan = document.querySelector('.plan-option.selected');
@@ -743,75 +1185,9 @@
         };
 
         localStorage.setItem('transactionData', JSON.stringify(transactionData));
-
         window.location.href = 'payment-confirmation.html';
     });
-        
-        window.addEventListener('scroll', function() {
-            const scrollUpBtn = document.getElementById('scrollUpBtn');
-            if (window.pageYOffset > 300) {
-                scrollUpBtn.classList.add('show');
-            } else {
-                scrollUpBtn.classList.remove('show');
-            }
-        });
-
-        document.getElementById('scrollUpBtn').addEventListener('click', function() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-        
-        function selectPlan(plan) {
-            const plans = document.querySelectorAll('.plan-option');
-            plans.forEach(p => p.classList.remove('selected'));
-            
-            event.currentTarget.classList.add('selected');
-            
-            const summaryRows = document.querySelectorAll('.summary-row');
-            const totalElement = document.querySelector('.summary-row.total span:last-child');
-            
-            let planName, planPrice, tax, total;
-            
-            if (plan === 'basic') {
-                planName = 'Basic Plan (Lifetime)';
-                planPrice = 0;
-            } else if (plan === 'pro') {
-                planName = 'Pro Plan (Monthly)';
-                planPrice = 29;
-            } else {
-                planName = 'Elite Plan (One-time)';
-                planPrice = 99;
-            }
-            
-            tax = planPrice * 0.18; 
-            total = planPrice + tax;
-            
-            summaryRows[0].innerHTML = `<span>${planName}</span><span>$${planPrice.toFixed(2)}</span>`;
-            summaryRows[1].innerHTML = `<span>GST (18%)</span><span>$${tax.toFixed(2)}</span>`;
-            totalElement.textContent = `$${total.toFixed(2)}`;
-        }
-        
-        function selectPayment(method) {
-            const methods = document.querySelectorAll('.payment-method');
-            methods.forEach(m => m.classList.remove('selected'));
-            
-            event.currentTarget.classList.add('selected');
-            
-            const paymentSections = document.querySelectorAll('.payment-section');
-            paymentSections.forEach(section => {
-                section.classList.remove('active');
-            });
-            
-            if (method === 'card') {
-                document.getElementById('card-payment-section').classList.add('active');
-            } else if (method === 'apple') {
-                document.getElementById('apple-payment-section').classList.add('active');
-            } else if (method === 'payTM') {
-                document.getElementById('paytm-payment-section').classList.add('active');
-            }
-        }
+});
     </script>
 </body>
 </html>
