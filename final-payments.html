@@ -1188,6 +1188,93 @@ document.addEventListener('DOMContentLoaded', function() {
         window.location.href = 'payment-confirmation.html';
     });
 });
+
+// Add this function which is missing from the original code
+
+// Function to select payment method
+function selectPayment(method) {
+    // Remove 'selected' class from all payment methods
+    const paymentMethods = document.querySelectorAll('.payment-method');
+    paymentMethods.forEach(item => {
+        item.classList.remove('selected');
+    });
+    
+    // Add 'selected' class to clicked payment method
+    if (method === 'card') {
+        document.querySelector('.payment-method:nth-child(1)').classList.add('selected');
+    } else if (method === 'payTM') {
+        document.querySelector('.payment-method:nth-child(2)').classList.add('selected');
+    } else if (method === 'apple') {
+        document.querySelector('.payment-method:nth-child(3)').classList.add('selected');
+    }
+    
+    // Hide all payment sections
+    const paymentSections = document.querySelectorAll('.payment-section');
+    paymentSections.forEach(section => {
+        section.classList.remove('active');
+    });
+    
+    // Show selected payment section
+    document.getElementById(`${method}-payment-section`).classList.add('active');
+    
+    // Update order summary with appropriate fees based on payment method
+    updateOrderSummary();
+}
+
+// Function to select plan (this is referenced in the onclick but not defined in the original code)
+function selectPlan(plan) {
+    // Remove 'selected' class from all plans
+    const planOptions = document.querySelectorAll('.plan-option');
+    planOptions.forEach(item => {
+        item.classList.remove('selected');
+    });
+    
+    // Add 'selected' class to clicked plan
+    if (plan === 'pro') {
+        document.querySelector('.plan-option:nth-child(1)').classList.add('selected');
+    } else if (plan === 'elite') {
+        document.querySelector('.plan-option:nth-child(2)').classList.add('selected');
+    }
+    
+    // Update order summary
+    updateOrderSummary();
+}
+
+// Function to update order summary based on selected plan and payment method
+function updateOrderSummary() {
+    const selectedPlan = document.querySelector('.plan-option.selected');
+    const planName = selectedPlan.querySelector('h4').textContent;
+    const planPrice = selectedPlan.querySelector('.price').textContent.replace('$', '');
+    const planPeriod = selectedPlan.querySelector('.period').textContent;
+    
+    // Calculate GST (18%)
+    const price = parseFloat(planPrice);
+    const gst = price * 0.18;
+    const total = price + gst;
+    
+    // Update summary in the DOM
+    const summaryRows = document.querySelectorAll('.summary-row');
+    summaryRows[0].innerHTML = `<span>${planName} (${planPeriod})</span><span>$${price.toFixed(2)}</span>`;
+    summaryRows[1].innerHTML = `<span>GST (18%)</span><span>$${gst.toFixed(2)}</span>`;
+    summaryRows[2].innerHTML = `<span>Total</span><span>$${total.toFixed(2)}</span>`;
+}
+
+// Add scroll-up button functionality
+window.onscroll = function() {
+    const scrollUpBtn = document.getElementById('scrollUpBtn');
+    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        scrollUpBtn.classList.add('show');
+    } else {
+        scrollUpBtn.classList.remove('show');
+    }
+};
+
+document.getElementById('scrollUpBtn').addEventListener('click', function() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
     </script>
 </body>
 </html>
