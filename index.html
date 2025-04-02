@@ -10,6 +10,8 @@
         @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil:opsz,wght@10..72,100..900&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
         html{
             scroll-behavior: smooth;
@@ -31,6 +33,7 @@
         body {
             font-family: 'Montserrat', sans-serif;
             margin: 0;
+            background-color: #000000;
             padding: 0;
             line-height: 1.6;
         }
@@ -81,8 +84,9 @@
 
 
         nav ul li a:hover {
-            background-color: #83b1b1;
-            color: rgb(33, 33, 33);
+            background-color: #b5b5b5;
+            color: rgb(0, 0, 0);
+            text-shadow: none;
         }
 
         .button-sign{
@@ -100,8 +104,8 @@
         }
 
         .button-sign:hover{
-            background-color: #3e5c5d;
-            color: #ffffff;
+            background-color: #b5b5b5;
+            color: #000000;
         }
 
         .hero {
@@ -114,10 +118,12 @@
             animation: float linear 0.3s;
         }
 
+                /* Typewriter effect styling - with responsive adjustments */
         .hero h1 {
             font-size: 3.5rem;
             text-shadow: 0px 0px 8px rgba(255, 255, 255, 1);
             margin-bottom: 25px;
+            font-family: 'Orbitron';
             background: url('Assets/mask-2.jpg');
             background-repeat: no-repeat;
             background-size: cover;
@@ -125,7 +131,58 @@
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: float linear 1s;
+            animation: none; /* Remove the float animation */
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            border-right: 3px solid white;
+            max-width: 90%; /* Prevent overflow on small screens */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero h1.typing-complete {
+            border-right: 3px solid white;
+            animation: blink-cursor 0.7s step-end infinite;
+        }
+
+        @keyframes blink-cursor {
+            from, to { border-color: transparent; }
+            50% { border-color: white; }
+        }
+
+        /* Responsive adjustments for the typewriter effect */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+                white-space: normal;
+                border-right: none;
+            }
+            
+            .hero h1.typing-complete {
+                border-right: none;
+                position: relative;
+            }
+            
+            .hero h1.typing-complete::after {
+                content: '|';
+                position: absolute;
+                right: -10px;
+                animation: blink-cursor 0.7s step-end infinite;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+                padding: 0 15px;
+            }
         }
 
         .hero p {
@@ -747,6 +804,16 @@
           }
         }
 
+        .typewriter {
+            font-family: "Courier New", monospace;
+            font-size: 24px;
+            text-align: center;
+            border-right: 2px solid white; /* Blinking cursor effect */
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+        }
+
     </style>
 </head>
 <body>
@@ -765,8 +832,8 @@
     </header>
 
     <section class="hero">
-        <h1>Learn AI Smarter, Faster, Better!</h1>
-        <p>Empowering Minds with AI-Powered Learning</p>
+        <h1></h1>
+        <p>Learn AI Smarter, faster, better!</p>
         <a href="options.html" class="button-sign">Get Started</a>
     </section>
     

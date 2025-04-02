@@ -3,257 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generative AI</title>
+    <title>Course Viewing - Learn.AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* Reset and Base Styles */
-        * {
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #121212;
+            color: #fff;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
-
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #1a202c;
-            color: #e2e8f0;
-            line-height: 1.6;
-        }
-
-        /* Layout Styles */
         .container {
-            display: flex;
-            height: 100vh;
+            max-width: 900px;
+            margin: 20px auto;
+            background: #1e1e1e;
+            padding: 25px;
+            box-shadow: 0px 0px 12px rgb(255, 255, 255);
         }
-
-        /* Sidebar Styles */
-        .sidebar {
-            width: 250px;
-            background-color: #2d3748;
-            padding: 20px;
-            overflow-y: auto;
+        h1, h2 {
+            text-align: center;
+            font-weight: 600;
         }
-
-        .sidebar h2 {
-            font-size: 1.25rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: #fff;
-        }
-
-        .course-section {
-            margin-bottom: 20px;
-        }
-
-        .course-section h3 {
-            font-size: 1rem;
-            color: #cbd5e0;
-            margin-bottom: 10px;
-        }
-
-        .lesson {
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 1rem;
-            transition: background-color 0.3s ease;
-        }
-
-        .lesson:hover {
-            background-color: #4a5568;
-        }
-
-        .lesson.active-lesson {
-            background-color: #4a5568;
-        }
-
-        /* Main Content Styles */
-        .main-content {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .video-container {
-            background-color: #000;
-            flex-grow: 1;
-            display: flex;
-        }
-
-        .video-container video {
+        video {
             width: 100%;
-            height: 100%;
+            border-radius: 12px;
+            outline: none;
+            box-shadow: 0px 4px 12px rgba(255, 255, 255, 0.1);
         }
-
-        .course-description {
-            background-color: #2d3748;
-            padding: 20px;
+        .modules {
+            margin-top: 20px;
+            list-style: none;
+            padding: 0;
         }
-
-        .description-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .description-header h1 {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn {
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
+        .modules li {
+            padding: 15px;
+            border-bottom: 1px solid #333;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            background: #2a2a2a;
+            margin: 8px 0;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 400;
         }
-
-        .btn-primary {
-            background-color: #3182ce;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: #2c5282;
-        }
-
-        .btn-secondary {
-            background-color: #4a5568;
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background-color: #2d3748;
-        }
-
-        /* Responsive Styles */
-        @media screen and (max-width: 768px) {
+        @media (max-width: 768px) {
             .container {
-                flex-direction: column;
+                width: 90%;
             }
-
-            .sidebar {
-                width: 100%;
-                max-height: 300px;
-            }
-
-            .description-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .action-buttons {
+            .menu {
                 margin-top: 10px;
-                width: 100%;
-            }
-
-            .action-buttons .btn {
-                flex-grow: 1;
+                flex-direction: column;
+                gap: 10px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <h2>Generative AI</h2>
-            
-            <div class="course-sections">
-                <div class="course-section">
-                    <h3>Introduction</h3>
-                    <div class="lesson-list">
-                        <div class="lesson active-lesson" data-video-src="intro.mp4">
-                            <span>Course Overview</span>
-                        </div>
-                        <div class="lesson" data-video-src="what-is-gen-ai.mp4">
-                            <span>What is Generative AI?</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="course-section">
-                    <h3>AI Fundamentals</h3>
-                    <div class="lesson-list">
-                        <div class="lesson" data-video-src="gen-basics.mp4">
-                            <span>Generative AI Structure</span>
-                        </div>
-                        <div class="lesson" data-video-src="gen-tags.mp4">
-                            <span>AI Essentials</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Main Content Area -->
-        <div class="main-content">
-            <!-- Video Player -->
-            <div class="video-container">
-                <video id="courseVideo" controls>
-                    <source id="videoSource" src="intro.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </div>
-
-            <!-- Course Description -->
-            <div class="course-description">
-                <div class="description-header">
-                    <h1 id="lessonTitle">Course Overview</h1>
-                    <div class="action-buttons">
-                        <button class="btn btn-primary">Next Lesson</button>
-                        <button class="btn btn-secondary">Mark Complete</button>
-                    </div>
-                </div>
-                <p id="lessonDescription">
-                    Welcome to the Generative AI Masterclass. In this course, you'll learn 
-                    everything from basic to advanced Generative AI techniques.
-                </p>
-            </div>
-        </div>
+        <h1>Generative AI</h1>
+        <p style="text-align: center;">Welcome to this course. Below is the course video and modules.</p>
+        
+        <video id="courseVideo" controls>
+            <source src="sample-video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        
+        <h2>Course Modules</h2>
+        <ul class="modules">
+            <li onclick="changeVideo('video1.mp4')">Module 1: OpenAI API</li>
+            <li>Next Module upload on 4-04-2025</li>
+        </ul>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const lessons = document.querySelectorAll('.lesson');
-            const videoPlayer = document.getElementById('courseVideo');
-            const videoSource = document.getElementById('videoSource');
-            const lessonTitle = document.getElementById('lessonTitle');
-            const lessonDescription = document.getElementById('lessonDescription');
-
-            const lessonDescriptions = {
-                'intro.mp4': "Welcome to the Generative AI Masterclass. Learn the foundational concepts of AI technology.",
-                'what-is-gen-ai.mp4': 'Explore the core principles and transformative potential of Generative AI.',
-                'gen-basics.mp4': 'Dive deep into the structural foundations of Generative AI systems.',
-                'gen-tags.mp4': 'Understand the essential elements that define modern AI technologies.'
-            };
-
-            lessons.forEach(lesson => {
-                lesson.addEventListener('click', () => {
-                    // Remove active class from all lessons
-                    lessons.forEach(l => l.classList.remove('active-lesson'));
-                    
-                    // Add active class to clicked lesson
-                    lesson.classList.add('active-lesson');
-
-                    // Update video source
-                    const videoSrc = lesson.getAttribute('data-video-src');
-                    videoSource.src = videoSrc;
-                    videoPlayer.load();
-                    videoPlayer.play();
-
-                    // Update lesson title and description
-                    lessonTitle.textContent = lesson.querySelector('span').textContent;
-                    lessonDescription.textContent = lessonDescriptions[videoSrc] || '';
-                });
-            });
-        });
+        function changeVideo(videoSrc) {
+            document.getElementById('courseVideo').src = videoSrc;
+        }
     </script>
 </body>
 </html>

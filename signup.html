@@ -12,27 +12,26 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+            font-family: "Poppins", sans-serif;
         }
         body {
+            background: linear-gradient(to bottom right, #f0f8ff, #87cefa);
             display: flex;
+            padding: 10px;
+            color: #ffffff;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background: linear-gradient(to bottom right, #f0f8ff, #87cefa);
-            backdrop-filter: blur(10px);
         }
         .signup-container {
-            margin-top: 1rem;
-            margin-bottom: 1rem;
+            animation: left linear 1s;
             background: rgb(0, 0, 0);
-            color: #ffffff;
-            padding: 1.5rem;
-            max-height: 95%;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            padding: 2rem;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
             text-align: center;
-            min-width: 300px;
+            width: 400px;
+            min-height: 99vh;
         }
         .signup-container h2 {
             margin-bottom: 1rem;
@@ -47,17 +46,14 @@
             font-size: 14px;
             color: #ffffff;
         }
-        .input-group label span {
-            color: red;
-        }
         .input-group input {
             width: 100%;
+            color: #f0f8ff;
+            background-color: #000000;
             padding: 8px;
-            background-color: black;
-            border: 2px solid #ffffff;
+            border-bottom: 2px solid white;
             border-top: none;
             border-left: none;
-            color: #ffffff;
             border-right: none;
             outline: none;
             margin-top: 5px;
@@ -71,17 +67,7 @@
         .input-group input:focus{
             border-bottom: 2px solid rgb(30, 214, 255);
         }
-
-        .role{
-            text-align: left;
-        }
-
-        .password-instruction {
-            font-size: 12px;
-            color: rgb(255, 169, 169);
-            margin-top: 5px;
-            margin-bottom: 10px;
-        }
+        
         .signup-btn {
             width: 100%;
             padding: 10px;
@@ -91,6 +77,9 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
+        }
+        .signup-btn:disabled {
+            background: #aaa;
         }
         .loading {
             display: none;
@@ -111,6 +100,9 @@
         .loading span:nth-child(3) {
             animation-delay: 0.4s;
         }
+        .login-link {
+            margin: 1rem;
+        }
         @keyframes bounce {
             0%, 80%, 100% {
                 transform: scale(0);
@@ -119,51 +111,58 @@
                 transform: scale(1);
             }
         }
-
         @media (max-width: 768px){
             .signup-container{
                 box-shadow: none;
+                max-width: 22rem;
             }
+        }
+
+        .password-requirements {
+            font-size: 12px;
+            color: #cccccc;
+            margin-top: 5px;
         }
     </style>
 </head>
 <body>
     <div class="signup-container">
-        <h2>Signup</h2>
-        <form>
+        <h2>Learn.AI</h2><br>
+        <h3>Create Account</h3><br>
         <div class="input-group">
-            <label for="full-name">Full Name <span>*</span></label>
-            <input type="text" id="full-name" placeholder="Enter your full name" required>
+            <label for="fullname">Full Name</label>
+            <input type="text" id="fullname" placeholder="Enter your full name" required>
+            <span id="fullname_error" style="color: red;"></span>
         </div>
         <div class="input-group">
-            <label for="email">Email <span>*</span></label>
+            <label for="email">Email</label>
             <input type="email" id="email" placeholder="Enter your email" required>
+            <span id="email_error" style="color: red;"></span>
         </div>
         <div class="input-group">
-            <label for="new-username">Username <span>*</span></label>
-            <input type="text" id="new-username" placeholder="Enter a username" required>
-            <p class="password-instruction">Username can only contain alphabets, underscore.</p>
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="Choose a username" required>
+            <span id="username_error" style="color: red;"></span>
         </div>
         <div class="input-group">
-            <label for="new-password">Password <span>*</span></label>
-            <input type="password" id="new-password" placeholder="Enter a password" required>
-            <p class="password-instruction">Password can only contain alphabets, digits, @, #, *</p>
-        </div>
-        <div class="input-group">
-            <label for="confirm-password">Confirm Password <span>*</span></label>
-            <input type="password" id="confirm-password" placeholder="Re-enter your password" required>
-        </div>
-        <div class="role">
-            <label for="role">Role <span style="color:red">*</span></label>
-            <div>
-                <input type="radio" id="role" name="role" value="student" required> Student <br>
-                <input type="radio" id="role" name="role" value="instructor" required> Instructor <br>
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Create a password" required>
+            <span id="pass_error" style="color: red;"></span>
+            <div class="password-requirements">
+                Password must be at least 8 characters with numbers and symbols
             </div>
+            <button class="toggle-password" style="background-color: #484848;color: aliceblue;float: inline-end;border: none;border-radius: 5px;font-size: 1rem;padding: 0.3rem;margin-top: 0.3rem;" onclick="togglePassword()">Show</button><br><br>
         </div>
-        <button class="signup-btn" onclick="handleSignup()" style="margin-top: 1rem;">Signup</button>
-        </form>
-        <br>Already Have an Account? <a href="options.html">Login</a>
-        <br><br>
+        <div class="input-group">
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" id="confirm-password" placeholder="Confirm your password" required>
+            <span id="confirm_pass_error" style="color: red;"></span>
+        </div>
+        <div class="login-link">
+            <p>Already have an account? <a href="login.html">Login</a></p>
+        </div>
+        
+        <button class="signup-btn" onclick="handleSignup()">Sign Up</button>
         <div class="loading" id="loading">
             <span></span><span></span><span></span>
         </div>

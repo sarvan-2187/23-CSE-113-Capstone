@@ -248,7 +248,7 @@
                     <i class="fas fa-user"></i>
                 </div>
                 <div>
-                    <h3>Dheeraj</h3>
+                    <h3>Jayadev</h3>
                     <p style="color: #888; font-size: 0.8rem;">Student</p>
                 </div>
             </div>
@@ -311,19 +311,19 @@
             <!-- Quick Actions -->
             <div class="card quick-actions" style="grid-column: span 2;">
                 <h2 class="card-title">Quick Actions</h2>
-                <button class="action-button">
+                <button id="downloadBtn" class="action-button" style="font-family: 'Poppins';" onclick="">
                     <i class="fas fa-download"></i>
                     Download Certificates
                 </button>
-                <button class="action-button secondary-button" onclick="window.location='quiz.html'">
+                <button class="action-button secondary-button" onclick="window.location='quiz.html'" style="font-family: 'Poppins';">
                     <i class="fas fa-book-open"></i>
                     Take Quiz
                 </button>
-                <button class="action-button" onclick="document.location='gen-ai.html'">
+                <button class="action-button" onclick="document.location='gen-ai.html'" style="font-family: 'Poppins';">
                     <i class="fas fa-book-open"></i>
                     Continue Learning
                 </button>
-                <button class="action-button secondary-button">
+                <button class="action-button secondary-button" style="font-family: 'Poppins';" onclick="document.location='proj-options.html'">
                     <i class="fas fa-book-open"></i>
                     Resume Project Work
                 </button>
@@ -397,6 +397,16 @@
                 }
             }
         });
+
+        document.getElementById("downloadBtn").addEventListener("click", function() {
+        const zipUrl = "Certificates.zip"; 
+        const a = document.createElement("a");
+        a.href = zipUrl;
+        a.download = "your-file.zip";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    });
     </script>
 </body>
 </html>

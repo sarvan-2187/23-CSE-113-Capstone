@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn.AI - Payment Confirmation</title>
+    <link rel="icon" href="Assets/Logo.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .confirmation-container {
+            text-align: center;
+        }
+        .confirmation-box {
+            background: #1e1e1e;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 4px 4px rgba(255, 255, 255, 0.334);
+            max-width: 400px;
+            width: 100%;
+            margin: auto;
+        }
+        .confirmation-icon {
+            width: 60px;
+            height: 60px;
+            background: url('Assets/success-icon.png') no-repeat center;
+            background-size: contain;
+            margin: 0 auto 15px;
+        }
+        .confirmation-title {
+            color: cyan;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .confirmation-message {
+            font-size: 16px;
+            color: #bdbdbd;
+            margin-bottom: 20px;
+        }
+        .confirmation-details {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #333;
+        }
+        .confirmation-button {
+            display: inline-block;
+            background: cyan;
+            color: rgb(0, 0, 0);
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .confirmation-button:hover {
+            background: #c7c7c7;
+        }
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #bdbdbd;
+        }
+        footer a {
+            text-decoration: none;
+            color: cyan;
+            margin: 0 5px;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="confirmation-container">
+        <div class="confirmation-box">
+            <div class="confirmation-icon"></div>
+            <h1 class="confirmation-title">Payment Successful!</h1>
+            <p class="confirmation-message">
+                Thank you for your purchase. Your Learn.AI subscription is now active!
+            </p>
+            <div class="confirmation-details">
+                <div class="detail-row"><span>Transaction ID</span><span id="transaction-id"></span></div>
+                <div class="detail-row"><span>Plan</span><span id="plan"></span></div>
+                <div class="detail-row"><span>Amount Paid</span><span id="amount"></span></div>
+                <div class="detail-row"><span>Date</span><span id="date"></span></div>
+                <div class="detail-row"><span>Payment Method</span><span id="payment-method"></span></div>
+            </div>
+            <a href="index.html" class="confirmation-button">Back to Home</a>
+        </div>
+    </div>
+    <footer>
+        <p>© 2025 Learn.AI - All rights reserved.</p>
+        <div>
+            <a href="index.html">Home</a> |
+            <a href="contact.html">Contact Us</a> |
+            <a href="centre.html">Find Nearest Centre</a> |
+            <a href="#">Instagram</a> |
+            <a href="#">LinkedIn</a>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const transactionData = JSON.parse(localStorage.getItem('transactionData'));
+            if (transactionData) {
+                document.getElementById('transaction-id').textContent = transactionData.transactionId;
+                document.getElementById('plan').textContent = transactionData.plan;
+                document.getElementById('amount').textContent = `$${transactionData.amount}`;
+                document.getElementById('date').textContent = transactionData.date;
+                document.getElementById('payment-method').textContent = transactionData.paymentMethod;
+            } else {
+                document.querySelector('.confirmation-box').innerHTML = `
+                    <h1 class="confirmation-title">Error</h1>
+                    <p class="confirmation-message">No transaction data found. Please contact support.</p>
+                    <a href="contact.html" class="confirmation-button">Contact Support</a>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>

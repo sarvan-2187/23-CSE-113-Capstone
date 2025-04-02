@@ -62,3 +62,54 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+// Responsive Typewriter effect for hero section
+document.addEventListener('DOMContentLoaded', function() {
+  const heroTitle = document.querySelector(".hero h1");
+  let text = "Master AI Skills, Build a Smarter Future. ";
+  
+  // Adjust text for smaller screens if needed
+  function updateTextForScreenSize() {
+      if (window.innerWidth <= 480) {
+          // Optional: use shorter text for very small screens
+          text = "Unlock AI. Unlock Potential.";
+      } else {
+          text = "Master AI Skills, Build a Smarter Future. ";
+      }
+      
+      // Reset the element when screen size changes
+      heroTitle.textContent = "";
+      startTypewriterEffect();
+  }
+  
+  // Initial setup
+  updateTextForScreenSize();
+  
+  // Re-run if window is resized
+  window.addEventListener('resize', function() {
+      // Only reset the animation if the screen size category changes
+      const wasSmall = text === "Unlock AI. Unlock Potential.";
+      const isNowSmall = window.innerWidth <= 480;
+      
+      if (wasSmall !== isNowSmall) {
+          updateTextForScreenSize();
+      }
+  });
+  
+  function startTypewriterEffect() {
+      let index = 0;
+      
+      function typeEffect() {
+          if (index < text.length) {
+              heroTitle.textContent += text.charAt(index);
+              index++;
+              setTimeout(typeEffect, 100); // Typing speed
+          } else {
+              // Add class for blinking cursor
+              heroTitle.classList.add("typing-complete");
+          }
+      }
+      
+      // Start typing
+      typeEffect();
+  }
+});
