@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignments Uploaded Successfully</title>
+    <link rel="icon" href="Assets/AI-Logo.svg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins';
+        }
+
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .success-container {
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 24px;
+            position: relative;
+        }
+
+        .circle {
+            width: 80px;
+            height: 80px;
+            background-color: #1e4620;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .checkmark {
+            stroke: #4caf50;
+            stroke-width: 3;
+            fill: none;
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 24px;
+            margin-bottom: 14px;
+        }
+
+        p {
+            color: #b0b0b0;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .details {
+            background-color: #262626;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 24px;
+            text-align: left;
+        }
+
+        .details p {
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .details p:last-child {
+            margin-bottom: 0;
+        }
+
+        .details strong {
+            color: #ffffff;
+        }
+
+        .btn {
+            background-color: #00ffee;
+            color: rgb(0, 0, 0);
+            border: none;
+            border-radius: 6px;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: #00aeee;
+        }
+
+        @media (max-width: 480px) {
+            .success-container {
+                padding: 30px 20px;
+            }
+            
+            .btn {
+                display: block;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <div class="success-icon">
+            <div class="circle">
+                <svg width="40" height="40" viewBox="0 0 24 24">
+                    <path class="checkmark" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+        </div>
+        
+        <h1>Assignment Uploaded Successfully!</h1>
+        <p>The Assignment of the succesive module have been published.</p>
+        
+        <div>
+            <a href="course_dashboard.html" class="btn">Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Upload</title>
+    <link rel="icon" href="Assets/AI-Logo.svg">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #e0e0e0;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #bdbdbd;
+        }
+        input[type="text"], 
+        textarea, 
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 15px;
+            border: 1px solid #333;
+            border-radius: 6px;
+            background-color: #333;
+            color: #e0e0e0;
+            box-sizing: border-box;
+        }
+        input[type="text"]:focus,
+        textarea:focus,
+        input[type="file"]:focus {
+            border-color: cyan;
+            outline: none;
+        }
+        .error-message {
+            color: #ff4444;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            display: none;
+        }
+        .invalid {
+            border-color: #ff4444;
+        }
+        button {
+            background: cyan;
+            color: rgb(0, 0, 0);
+            padding: 12px 20px;
+            border: none;
+            font-family: 'Poppins', sans-serif;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 600;
+            transition: background 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        button:hover {
+            background: #8bb1b0;
+        }
+        button:disabled {
+            background: #555;
+            cursor: not-allowed;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Upload Assignments</h2>
+        <form id="course-form" novalidate>
+            <div>
+                <label for="course-title">Title:</label>
+                <input type="text" id="course-title" required minlength="3" maxlength="100">
+                <div id="title-error" class="error-message">
+                    Title must be between 3 and 100 characters
+                </div>
+            </div>
+
+            <div>
+                <label for="course-description">Description:</label>
+                <textarea id="course-description" required minlength="10" maxlength="500"></textarea>
+                <div id="description-error" class="error-message">
+                    Description must be between 10 and 500 characters
+                </div>
+            </div>
+
+            <div>
+                <label for="course-files">Files:</label>
+                <input type="file" id="course-files" class="course-btn" required accept=".pdf,.doc,.docx,.ppt,.pptx">
+                <div id="files-error" class="error-message">
+                    Please select at least one valid file (PDF, DOC, DOCX, PPT, or PPTX)
+                </div>
+            </div>
+
+            <button type="submit" id="submit-btn">Upload</button>
+        </form>
+    </div>
+
+    <script>
+            document.getElementById('course-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const inputs = document.querySelectorAll('input, textarea');
+            inputs.forEach(input => input.classList.remove('invalid'));
+            const errorMessages = document.querySelectorAll('.error-message');
+            errorMessages.forEach(msg => msg.style.display = 'none');
+
+            const title = document.getElementById('course-title').value.trim();
+            const description = document.getElementById('course-description').value.trim();
+            const files = document.getElementById('course-files').files;
+
+            let isValid = true;
+
+            if (title.length < 3 || title.length > 100) {
+                document.getElementById('course-title').classList.add('invalid');
+                document.getElementById('title-error').style.display = 'block';
+                isValid = false;
+            }
+
+            if (description.length < 10 || description.length > 500) {
+                document.getElementById('course-description').classList.add('invalid');
+                document.getElementById('description-error').style.display = 'block';
+                isValid = false;
+            }
+
+            if (files.length === 0) {
+                document.getElementById('course-files').classList.add('invalid');
+                document.getElementById('files-error').style.display = 'block';
+                isValid = false;
+            } else {
+                const validExtensions = ['pdf', 'doc', 'docx', 'ppt', 'pptx'];
+                for (let file of files) {
+                    const extension = file.name.split('.').pop().toLowerCase();
+                    if (!validExtensions.includes(extension)) {
+                        document.getElementById('course-files').classList.add('invalid');
+                        document.getElementById('files-error').style.display = 'block';
+                        isValid = false;
+                        break;
+                    }
+                }
+            }
+
+            if (isValid) {
+                console.log('Title:', title);
+                console.log('Description:', description);
+                console.log('Files:', files);
+                document.location = 'upload-ass-succesful.html';
+            }
+        });
+
+        ['course-title', 'course-description', 'course-files'].forEach(id => {
+            document.getElementById(id).addEventListener('input', function() {
+                const submitBtn = document.getElementById('submit-btn');
+                const title = document.getElementById('course-title').value.trim();
+                const description = document.getElementById('course-description').value.trim();
+                const files = document.getElementById('course-files').files;
+
+                submitBtn.disabled = !(title.length >= 3 && title.length <= 100 &&
+                                    description.length >= 10 && description.length <= 500 &&
+                                    files.length > 0);
+            });
+        });
+    </script>
+</body>
+</html>
