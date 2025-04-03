@@ -654,147 +654,147 @@
     <button id="scrollUpBtn"><img src="Assets/up.svg" alt="Scroll Up"></button>
 
     <script>
-   document.addEventListener('DOMContentLoaded', function() {
-    // Get the checkout button
-    const checkoutButton = document.querySelector('.checkout-button');
-    
-    // Add click event listener to the checkout button
-    checkoutButton.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        // Get all required fields
-        const email = document.getElementById('email');
-        const firstName = document.getElementById('firstName');
-        const lastName = document.getElementById('lastName');
-        const cardNumber = document.getElementById('cardNumber');
-        const expiryDate = document.getElementById('expiryDate');
-        const cvv = document.getElementById('cvv');
-        const billingAddress = document.getElementById('billingAddress');
-        const city = document.getElementById('city');
-        const zipCode = document.getElementById('zipCode');
-        const country = document.getElementById('country');
-        const state = document.getElementById('state');
-        
-        // Simple validation - check if fields are empty
-        let isValid = true;
-        
-        // Array of required fields to check
-        const requiredFields = [
-            email, firstName, lastName, cardNumber, expiryDate, 
-            cvv, billingAddress, city, zipCode, country, state
-        ];
-        
-        // Check each field
-        requiredFields.forEach(field => {
-            if (!field.value.trim()) {
-                markInvalid(field);
-                isValid = false;
-            } else {
-                markValid(field);
-            }
-        });
-        
-        // Basic email validation
-        if (email.value.trim() && !isValidEmail(email.value)) {
-            markInvalid(email);
-            isValid = false;
-        }
-        
-        // Basic card number validation (16 digits)
-        if (cardNumber.value.trim() && !isValidCardNumber(cardNumber.value)) {
-            markInvalid(cardNumber);
-            isValid = false;
-        }
-        
-        // Basic expiry date validation (MM/YY format)
-        if (expiryDate.value.trim() && !isValidExpiryDate(expiryDate.value)) {
-            markInvalid(expiryDate);
-            isValid = false;
-        }
-        
-        // Basic CVV validation (3-4 digits)
-        if (cvv.value.trim() && !isValidCVV(cvv.value)) {
-            markInvalid(cvv);
-            isValid = false;
-        }
-        
-        // If all validations pass
-        if (isValid) {
-            alert('Form submitted successfully!');
-            // Here you would typically submit the form or make an API call
-        } else {
-            // Scroll to the first invalid field
-            const firstInvalid = document.querySelector('.invalid');
-            if (firstInvalid) {
-                firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-        }
-    });
-    
-    // Helper function to mark field as invalid
-    function markInvalid(field) {
-        field.classList.add('invalid');
-        field.classList.add('shake');
-        
-        // Remove the shake animation after it completes
-        setTimeout(() => {
-            field.classList.remove('shake');
-        }, 500);
-    }
-    
-    // Helper function to mark field as valid
-    function markValid(field) {
-        field.classList.remove('invalid');
-    }
-    
-    // Helper function to validate email
-    function isValidEmail(email) {
-        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return regex.test(email);
-    }
-    
-    // Helper function to validate card number
-    function isValidCardNumber(cardNumber) {
-        const regex = /^[\d\s]{16,19}$/;
-        return regex.test(cardNumber);
-    }
-    
-    // Helper function to validate expiry date
-    function isValidExpiryDate(expiryDate) {
-        const regex = /^(0[1-9]|1[0-2])\/([0-9]{2})$/;
-        return regex.test(expiryDate);
-    }
-    
-    // Helper function to validate CVV
-    function isValidCVV(cvv) {
-        const regex = /^[0-9]{3,4}$/;
-        return regex.test(cvv);
-    }
-    
-    // Format card number as the user types
-    const cardNumberField = document.getElementById('cardNumber');
-    if (cardNumberField) {
-        cardNumberField.addEventListener('input', function() {
-            let value = this.value.replace(/\s/g, '');
-            if (value.length > 0) {
-                value = value.match(new RegExp('.{1,4}', 'g')).join(' ');
-            }
-            this.value = value;
-            if (this.value.length > 19) {
-                this.value = this.value.slice(0, 19);
-            }
-        });
-    }
-    
-    // Format expiry date as the user types
-    const expiryDateField = document.getElementById('expiryDate');
-    if (expiryDateField) {
-        expiryDateField.addEventListener('input', function() {
-            let value = this.value.replace(/\D/g, '');
-            if (value.length > 2) {
-                value = value.slice(0, 2) + '/' + value.slice(2, 4);
-            }
-            this.value = value;
-        });
-    }
-});
+        document.addEventListener('DOMContentLoaded', function() {
+         // Get the checkout button
+         const checkoutButton = document.querySelector('.checkout-button');
+         
+         // Add click event listener to the checkout button
+         checkoutButton.addEventListener('click', function(e) {
+             e.preventDefault();
+             
+             // Get all required fields
+             const email = document.getElementById('email');
+             const firstName = document.getElementById('firstName');
+             const lastName = document.getElementById('lastName');
+             const cardNumber = document.getElementById('cardNumber');
+             const expiryDate = document.getElementById('expiryDate');
+             const cvv = document.getElementById('cvv');
+             const billingAddress = document.getElementById('billingAddress');
+             const city = document.getElementById('city');
+             const zipCode = document.getElementById('zipCode');
+             const country = document.getElementById('country');
+             const state = document.getElementById('state');
+             
+             // Simple validation - check if fields are empty
+             let isValid = true;
+             
+             // Array of required fields to check
+             const requiredFields = [
+                 email, firstName, lastName, cardNumber, expiryDate, 
+                 cvv, billingAddress, city, zipCode, country, state
+             ];
+             
+             // Check each field
+             requiredFields.forEach(field => {
+                 if (!field.value.trim()) {
+                     markInvalid(field);
+                     isValid = false;
+                 } else {
+                     markValid(field);
+                 }
+             });
+             
+             // Basic email validation
+             if (email.value.trim() && !isValidEmail(email.value)) {
+                 markInvalid(email);
+                 isValid = false;
+             }
+             
+             // Basic card number validation (16 digits)
+             if (cardNumber.value.trim() && !isValidCardNumber(cardNumber.value)) {
+                 markInvalid(cardNumber);
+                 isValid = false;
+             }
+             
+             // Basic expiry date validation (MM/YY format)
+             if (expiryDate.value.trim() && !isValidExpiryDate(expiryDate.value)) {
+                 markInvalid(expiryDate);
+                 isValid = false;
+             }
+             
+             // Basic CVV validation (3-4 digits)
+             if (cvv.value.trim() && !isValidCVV(cvv.value)) {
+                 markInvalid(cvv);
+                 isValid = false;
+             }
+             
+             // If all validations pass
+             if (isValid) {
+                 alert('Form submitted successfully!');
+                 // Here you would typically submit the form or make an API call
+             } else {
+                 // Scroll to the first invalid field
+                 const firstInvalid = document.querySelector('.invalid');
+                 if (firstInvalid) {
+                     firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                 }
+             }
+         });
+         
+         // Helper function to mark field as invalid
+         function markInvalid(field) {
+             field.classList.add('invalid');
+             field.classList.add('shake');
+             
+             // Remove the shake animation after it completes
+             setTimeout(() => {
+                 field.classList.remove('shake');
+             }, 500);
+         }
+         
+         // Helper function to mark field as valid
+         function markValid(field) {
+             field.classList.remove('invalid');
+         }
+         
+         // Helper function to validate email
+         function isValidEmail(email) {
+             const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+             return regex.test(email);
+         }
+         
+         // Helper function to validate card number
+         function isValidCardNumber(cardNumber) {
+             const regex = /^[\d\s]{16,19}$/;
+             return regex.test(cardNumber);
+         }
+         
+         // Helper function to validate expiry date
+         function isValidExpiryDate(expiryDate) {
+             const regex = /^(0[1-9]|1[0-2])\/([0-9]{2})$/;
+             return regex.test(expiryDate);
+         }
+         
+         // Helper function to validate CVV
+         function isValidCVV(cvv) {
+             const regex = /^[0-9]{3,4}$/;
+             return regex.test(cvv);
+         }
+         
+         // Format card number as the user types
+         const cardNumberField = document.getElementById('cardNumber');
+         if (cardNumberField) {
+             cardNumberField.addEventListener('input', function() {
+                 let value = this.value.replace(/\s/g, '');
+                 if (value.length > 0) {
+                     value = value.match(new RegExp('.{1,4}', 'g')).join(' ');
+                 }
+                 this.value = value;
+                 if (this.value.length > 19) {
+                     this.value = this.value.slice(0, 19);
+                 }
+             });
+         }
+         
+         // Format expiry date as the user types
+         const expiryDateField = document.getElementById('expiryDate');
+         if (expiryDateField) {
+             expiryDateField.addEventListener('input', function() {
+                 let value = this.value.replace(/\D/g, '');
+                 if (value.length > 2) {
+                     value = value.slice(0, 2) + '/' + value.slice(2, 4);
+                 }
+                 this.value = value;
+             });
+         }
+     });
