@@ -70,6 +70,26 @@
             justify-content: center;
         }
 
+        /* Logout Button */
+        .logout-button {
+            background-color: #FF3D00;
+            color: var(--text-light);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .logout-button:hover {
+            background-color: #DD2C00;
+            box-shadow: 0 2px 10px rgba(255, 61, 0, 0.4);
+        }
+
         /* Dashboard Grid */
         .dashboard-grid {
             display: grid;
@@ -237,6 +257,10 @@
                     <h3>Vijay Ahuja</h3>
                     <p style="color: #888; font-size: 0.8rem;">Senior Instructor</p>
                 </div>
+                <button class="logout-button" onclick="window.location.href='index.html'">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </button>
             </div>
         </header>
 
