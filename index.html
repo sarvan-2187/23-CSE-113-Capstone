@@ -678,7 +678,6 @@
           opacity: 1;
         }
 
-        /* Responsive breakpoints */
         @media (max-width: 1024px) {
           .grid {
             grid-template-columns: repeat(3, 1fr);
@@ -803,7 +802,6 @@
           
           .grid-item p {
             font-size: 1.5rem;
-            /* Keep text visible on mobile for better UX */
             opacity: 1;
             transform: translateY(0);
           }
@@ -832,31 +830,30 @@
         }
 
         .container {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-}
+          display: flex;
+          width: 100%;
+          align-items: center;
+          justify-content: center;
+        }
 
-.grid {
-    margin: 2rem;
-    width: calc(100% - 4rem);
-}
+        .grid {
+            margin: 2rem;
+            width: calc(100% - 4rem);
+        }
 
-/* Update media queries */
-@media (max-width: 768px) {
-    .grid {
-        margin: 1rem;
-        width: calc(100% - 2rem);
-    }
-}
+        @media (max-width: 768px) {
+            .grid {
+                margin: 1rem;
+                width: calc(100% - 2rem);
+            }
+        }
 
-@media (max-width: 480px) {
-    .grid {
-        margin: 0.5rem;
-        width: calc(100% - 1rem);
-    }
-}
+        @media (max-width: 480px) {
+            .grid {
+                margin: 0.5rem;
+                width: calc(100% - 1rem);
+            }
+        }
 
     </style>
 </head>
@@ -901,7 +898,6 @@
               </div>
               
               <div class="grid-item logo-item animate-on-scroll" style="grid-column: span 2; grid-row: span 2; background-image: url('Learn.AI.gif');">
-                <!-- Empty for logo animation -->
               </div>
               
               <div class="grid-item agentic-item animate-on-scroll" style="grid-column: span 1; grid-row: span 2; background-image: url('https://indiatechnologynews.in/wp-content/uploads/2023/06/Artificial-Intelligence-800x400.jpg');">
