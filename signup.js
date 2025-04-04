@@ -147,8 +147,8 @@ function handleSignup() {
             
             // Redirect to login page after successful signup
             // In a real application, you might want to show a success message first
-            alert("Account created successfully! Please log in.");
-            window.location.href = "login.html";
+            alert("Account created successfully! Please proceed with Payment.");
+            window.location.href = "payments.html";
             
             // Re-enable the button and hide loading indicator
             signupButton.disabled = false;
