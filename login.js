@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function() {
             loading.style.alignItems = "center";
             
             setTimeout(() => {
-                window.location.href = "new_dashboard.html";
+                window.location.href = "courses.html";
             }, 2000);
         }
     });
