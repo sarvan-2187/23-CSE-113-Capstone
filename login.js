@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const nameError = document.getElementById("name_error");
     const passError = document.getElementById("pass_error");
     const loading = document.getElementById("loading");
-    const usernameRegex = /^[A-Za-z_]+$/;
+    const usernameRegex = /^[A-Za-z_0-9]+$/;
     
     // Clear error messages when user starts typing
     username.addEventListener("input", function() {
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function() {
             nameError.textContent = "Username is required";
             valid = false;
         } else if (!usernameRegex.test(username.value)) {
-            nameError.textContent = "Username can only contain alphabets and underscores";
+            nameError.textContent = "Username can only contain alphabets, numbers and underscores";
             valid = false;
         } else {
             nameError.textContent = "";
