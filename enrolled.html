@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>learn.ai - Courses</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/poppins/4.0.1/poppins.min.css" rel="stylesheet" />
+    <style>
+        :root {
+            --bg-color: #0a1219;
+            --card-bg: #10212f;
+            --text-primary: #ffffff;
+            --text-secondary: #b3e0ff;
+            --accent-color: #00c2cb;
+            --hover-color: #0de5f0;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0, 194, 203, 0.2);
+            --btn-gradient: linear-gradient(90deg, #00c2cb, #08e1ff);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            background-image: radial-gradient(circle at 50% 0%, #0f2636 0%, var(--bg-color) 40%);
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            background: linear-gradient(90deg, #00c2cb, #08e1ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        @keyframes float {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            border: 1px solid rgba(0, 194, 203, 0.1);
+        }
+
+        .service img {
+            height: 80px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px rgba(0, 194, 203, 0.6));
+        }
+
+        .service h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .service p {
+            color: var(--text-secondary);
+            margin-bottom: 22px;
+            flex-grow: 1;
+            font-weight: 300;
+        }
+
+        .ai-courses {
+            font-size: 0.7rem;
+            background: linear-gradient(90deg, #00c2cb, #08e1ff);
+            color: #0a1219;
+            padding: 3px 8px;
+            border-radius: 12px;
+            margin-left: 8px;
+            position: relative;
+            top: -5px;
+            animation: pulse 2s infinite;
+            font-weight: 500;
+        }
+
+        .new-badge {
+            font-size: 0.7rem;
+            background: linear-gradient(90deg, #ff6b6b, #ff9d6c);
+            color: #0a1219;
+            padding: 3px 8px;
+            border-radius: 12px;
+            margin-left: 8px;
+            position: relative;
+            top: -5px;
+            animation: pulse 2s infinite;
+            font-weight: 500;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+
+        .btn-enroll {
+            padding: 10px 25px;
+            background: var(--btn-gradient);
+            color: #0a1219;
+            border: none;
+            border-radius: 50px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            margin-top: auto;
+            box-shadow: 0 4px 12px rgba(0, 194, 203, 0.4);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-enroll:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 18px rgba(0, 194, 203, 0.6);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .services {
+                grid-template-columns: 1fr;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section id="courses" class="section">
+            <h2 style="animation: float linear 1s; animation-timeline: view();">Continue Learning</h2>
+            <div class="services">
+                <div class="service">
+                <div class="service">
+                    <img src="Assets/gen-ai.svg" alt="Generative AI">
+                    <h3>Generative AI <span class="ai-courses">#3 Trending</span></h3>
+                    <p>Understand the fundamentals of AI-generated content and creativity.</p>
+                    <a href="gen-ai.html" class="btn-enroll">Continue</a>
+                </div>
+                <div class="service">
+                    <img src="Assets/python.svg" alt="Python">
+                    <h3>Python Programming</h3>
+                    <p>Master Python programming fundamentals for AI and data science applications.</p>
+                    <a href="python.html" class="btn-enroll" style="color: white;">Continue</a>
+                </div>
+                <div class="service">
+                    <img src="Assets/web-dev.svg" alt="Web Development">
+                    <h3>AI in Web Development</h3>
+                    <p>Learn to integrate AI capabilities into modern web applications.</p>
+                    <a href="web-ai.html" class="btn-enroll" style="color: white;">Continue</a>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

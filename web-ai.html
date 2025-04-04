@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Viewing - Learn.AI</title>
+    <link rel="icon" href="Assets/AI-Logo.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #121212;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background: #1e1e1e;
+            padding: 25px;
+            box-shadow: 0px 0px 12px rgb(255, 255, 255);
+        }
+        h1, h2 {
+            text-align: center;
+            font-weight: 600;
+        }
+        video {
+            width: 100%;
+            border-radius: 12px;
+            outline: none;
+            box-shadow: 0px 4px 12px rgba(255, 255, 255, 0.1);
+        }
+        .modules {
+            margin-top: 20px;
+            list-style: none;
+            padding: 0;
+        }
+        .modules li {
+            padding: 15px;
+            border-bottom: 1px solid #333;
+            cursor: pointer;
+            background: #2a2a2a;
+            margin: 8px 0;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 400;
+        }
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+            .menu {
+                margin-top: 10px;
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Generative AI</h1>
+        <p style="text-align: center;">Welcome to this course. Below is the course video and modules.</p>
+        
+        <video id="courseVideo" controls>
+            <source src="ai-tools-video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        
+        <h2>Course Modules</h2>
+        <ul class="modules">
+            <li onclick="changeVideo('html-video.mp4')">Module 1: HTML</li>
+            <li onclick="changeVideo('css.webm')">Module 2: CSS</li>
+            <li onclick="changeVideo('js-video.mp4')">Module 3: JS</li>
+        </ul>
+    </div>
+
+    <script>
+        function changeVideo(videoSrc) {
+            document.getElementById('courseVideo').src = videoSrc;
+        }
+    </script>
+</body>
+</html>
