@@ -5,9 +5,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const nameError = document.getElementById("name_error");
     const passError = document.getElementById("pass_error");
     const loading = document.getElementById("loading");
-    const usernameRegex = /^[A-Za-z0-9_]+$/;  // Modified to allow numbers for Instructor ID
+    const usernameRegex = /^[A-Za-z0-9_]+$/;  
     
-    // Clear error messages when user starts typing
     username.addEventListener("input", function() {
         nameError.textContent = "";
         username.style.borderBottom = "2px solid white";
@@ -22,7 +21,6 @@ document.addEventListener("DOMContentLoaded", function() {
         if (event) event.preventDefault();
         let valid = true;
         
-        // Instructor ID validation
         if (username.value.trim() === "") {
             nameError.textContent = "Instructor ID is required";
             username.style.borderBottom = "2px solid #ff6b6b";
@@ -36,7 +34,6 @@ document.addEventListener("DOMContentLoaded", function() {
             username.style.borderBottom = "2px solid white";
         }
         
-        // Password validation
         if (password.value.trim() === "") {
             passError.textContent = "Password is required";
             password.style.borderBottom = "2px solid #ff6b6b";
@@ -50,7 +47,6 @@ document.addEventListener("DOMContentLoaded", function() {
             password.style.borderBottom = "2px solid white";
         }
         
-        // If all validations pass
         if (valid) {
             loginBtn.disabled = true;
             loading.style.display = "flex";
@@ -63,17 +59,14 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
     
-    // Add event listener to login button
     loginBtn.addEventListener("click", handleLogin);
     
-    // Add event listener for form submission via Enter key
     document.addEventListener("keydown", function(event) {
         if (event.key === "Enter") {
             handleLogin();
         }
     });
     
-    // Expose handleLogin function globally for the HTML onclick attribute
     window.handleLogin = handleLogin;
 });
 

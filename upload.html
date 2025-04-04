@@ -126,34 +126,29 @@
         document.getElementById('course-form').addEventListener('submit', function(event) {
             event.preventDefault();
             
-            // Reset previous error states
             const inputs = document.querySelectorAll('input, textarea');
             inputs.forEach(input => input.classList.remove('invalid'));
             const errorMessages = document.querySelectorAll('.error-message');
             errorMessages.forEach(msg => msg.style.display = 'none');
 
-            // Get form values
             const title = document.getElementById('course-title').value.trim();
             const description = document.getElementById('course-description').value.trim();
             const files = document.getElementById('course-files').files;
 
             let isValid = true;
 
-            // Validate title
             if (title.length < 3 || title.length > 100) {
                 document.getElementById('course-title').classList.add('invalid');
                 document.getElementById('title-error').style.display = 'block';
                 isValid = false;
             }
 
-            // Validate description
             if (description.length < 10 || description.length > 500) {
                 document.getElementById('course-description').classList.add('invalid');
                 document.getElementById('description-error').style.display = 'block';
                 isValid = false;
             }
 
-            // Validate files
             if (files.length === 0) {
                 document.getElementById('course-files').classList.add('invalid');
                 document.getElementById('files-error').style.display = 'block';
@@ -171,7 +166,6 @@
                 }
             }
 
-            // If form is valid, proceed with submission
             if (isValid) {
                 console.log('Title:', title);
                 console.log('Description:', description);
@@ -180,7 +174,6 @@
             }
         });
 
-        // Real-time validation
         ['course-title', 'course-description', 'course-files'].forEach(id => {
             document.getElementById(id).addEventListener('input', function() {
                 const submitBtn = document.getElementById('submit-btn');

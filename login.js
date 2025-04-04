@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const loading = document.getElementById("loading");
     const usernameRegex = /^[A-Za-z_0-9]+$/;
     
-    // Clear error messages when user starts typing
     username.addEventListener("input", function() {
         nameError.textContent = "";
     });
@@ -20,7 +19,6 @@ document.addEventListener("DOMContentLoaded", function() {
         event.preventDefault();
         let valid = true;
         
-        // Username validation
         if (username.value.trim() === "") {
             nameError.textContent = "Username is required";
             valid = false;
@@ -31,7 +29,6 @@ document.addEventListener("DOMContentLoaded", function() {
             nameError.textContent = "";
         }
         
-        // Password validation
         if (password.value.trim() === "") {
             passError.textContent = "Password is required";
             valid = false;
@@ -42,7 +39,6 @@ document.addEventListener("DOMContentLoaded", function() {
             passError.textContent = "";
         }
         
-        // If all validations pass
         if (valid) {
             loginBtn.disabled = true;
             loading.style.display = "flex";

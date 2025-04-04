@@ -36,7 +36,6 @@
             margin: 0 auto;
         }
 
-        /* Header Styles */
         .header {
             display: flex;
             justify-content: space-between;
@@ -70,7 +69,6 @@
             justify-content: center;
         }
 
-        /* Dashboard Grid */
         .dashboard-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -110,7 +108,6 @@
             color: var(--accent-cyan);
         }
 
-        /* Progress Bars */
         .progress-container {
             background-color: #2C2C2C;
             border-radius: 1rem;
@@ -131,7 +128,6 @@
             margin-bottom: 0.5rem;
         }
 
-        /* Quick Actions */
         .quick-actions {
             display: flex;
             flex-direction: column;
@@ -162,7 +158,6 @@
             color: var(--text-light);
         }
 
-        /* Logout Button */
         .logout-button {
             background-color: #FF3D00;
             color: var(--text-light);
@@ -182,7 +177,6 @@
             box-shadow: 0 2px 10px rgba(255, 61, 0, 0.4);
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
             body {
                 padding: 1rem;
@@ -198,12 +192,10 @@
                 grid-template-columns: 1fr;
             }
 
-            /* Ensure full-width grid and specific card layouts for mobile */
             .dashboard-grid .card {
                 width: 100%;
             }
 
-            /* Special handling for learning progress card */
             .dashboard-grid .card:first-child {
                 grid-column: 1 / -1;
             }
@@ -243,7 +235,6 @@
                 font-size: 1rem;
             }
 
-            /* Further optimize for very small screens */
             .card {
                 padding: 1rem;
             }
@@ -279,7 +270,6 @@
         </header>
 
         <div class="dashboard-grid">
-            <!-- Learning Progress -->
             <div class="card" style="grid-column: span 2;">
                 <div class="card-header">
                     <h2 class="card-title">Learning Progress</h2>
@@ -288,7 +278,6 @@
                 <canvas id="learningProgressChart"></canvas>
             </div>
 
-            <!-- Current Courses -->
             <div class="card" style="grid-column: span 2;">
                 <div class="card-header">
                     <h2 class="card-title">My Courses</h2>
@@ -325,7 +314,6 @@
                 </div>
             </div>
 
-            <!-- Quick Actions -->
             <div class="card quick-actions" style="grid-column: span 2;">
                 <h2 class="card-title">Quick Actions</h2>
                 <button id="downloadBtn" class="action-button" style="font-family: 'Poppins';" onclick="">
@@ -346,7 +334,6 @@
                 </button>
             </div>
 
-            <!-- Learning Stats -->
             <div class="card" style="grid-column: span 2;">
                 <div class="card-header">
                     <h2 class="card-title">Learning Stats</h2>

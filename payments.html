@@ -175,7 +175,7 @@
         .pricing-container {
             display: flex;
             justify-content: center;
-            flex-wrap: nowrap; /* Prevent wrapping to keep cards in one line */
+            flex-wrap: nowrap; 
             gap: 30px;
             max-width: 1200px;
             margin: 0 auto;
@@ -185,8 +185,8 @@
             background-color: #111;
             border-radius: 15px;
             padding: 40px;
-            width: 300px; /* Fixed width to ensure consistency */
-            flex: 0 0 300px; /* Prevent cards from shrinking or growing */
+            width: 300px; 
+            flex: 0 0 300px; 
             transition: transform 0.3s, box-shadow 0.3s;
             border: 1px solid #333;
             position: relative;
@@ -460,14 +460,14 @@
 
         @media (max-width: 1000px) {
             .pricing-container {
-                flex-wrap: wrap; /* Allow wrapping on smaller screens */
+                flex-wrap: wrap; 
                 justify-content: center;
             }
 
             .pricing-card {
                 width: 80%;
                 max-width: 350px;
-                flex: 0 0 auto; /* Allow cards to take their natural width */
+                flex: 0 0 auto; 
             }
 
             .comparison-table {
@@ -681,7 +681,6 @@
 
     <script>
 
-        // Scroll to top button
         window.addEventListener('scroll', function() {
             const scrollUpBtn = document.getElementById('scrollUpBtn');
             if (window.pageYOffset > 300) {

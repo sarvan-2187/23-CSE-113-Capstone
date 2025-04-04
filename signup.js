@@ -1,4 +1,3 @@
-// DOM Elements
 const fullnameInput = document.getElementById('fullname');
 const emailInput = document.getElementById('email');
 const usernameInput = document.getElementById('username');
@@ -12,7 +11,6 @@ const confirmPassError = document.getElementById('confirm_pass_error');
 const loadingIndicator = document.getElementById('loading');
 const signupButton = document.querySelector('.signup-btn');
 
-// Toggle password visibility
 function togglePassword() {
     if (passwordInput.type === "password") {
         passwordInput.type = "text";
@@ -23,7 +21,6 @@ function togglePassword() {
     }
 }
 
-// Validate full name
 function validateFullname() {
     const fullname = fullnameInput.value.trim();
     
@@ -39,7 +36,6 @@ function validateFullname() {
     }
 }
 
-// Validate email
 function validateEmail() {
     const email = emailInput.value.trim();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -56,7 +52,6 @@ function validateEmail() {
     }
 }
 
-// Validate username
 function validateUsername() {
     const username = usernameInput.value.trim();
     const usernameRegex = /^[a-zA-Z0-9_]{4,20}$/;
@@ -73,10 +68,8 @@ function validateUsername() {
     }
 }
 
-// Validate password
 function validatePassword() {
     const password = passwordInput.value;
-    // Password must be at least 8 characters with at least one number and one special character
     const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
     
     if (password === '') {
@@ -94,7 +87,6 @@ function validatePassword() {
     }
 }
 
-// Validate password confirmation
 function validatePasswordConfirmation() {
     const password = passwordInput.value;
     const confirmPassword = confirmPasswordInput.value;
@@ -111,31 +103,24 @@ function validatePasswordConfirmation() {
     }
 }
 
-// Add event listeners for real-time validation
 fullnameInput.addEventListener('input', validateFullname);
 emailInput.addEventListener('input', validateEmail);
 usernameInput.addEventListener('input', validateUsername);
 passwordInput.addEventListener('input', validatePassword);
 confirmPasswordInput.addEventListener('input', validatePasswordConfirmation);
 
-// Handle form submission
 function handleSignup() {
-    // Validate all fields
     const isFullnameValid = validateFullname();
     const isEmailValid = validateEmail();
     const isUsernameValid = validateUsername();
     const isPasswordValid = validatePassword();
     const isPasswordConfirmationValid = validatePasswordConfirmation();
     
-    // If all validations pass
     if (isFullnameValid && isEmailValid && isUsernameValid && isPasswordValid && isPasswordConfirmationValid) {
-        // Disable the button and show loading indicator
         signupButton.disabled = true;
         loadingIndicator.style.display = 'block';
         
-        // Simulate API call with setTimeout
         setTimeout(() => {
-            // Here you would normally send data to your server
             const userData = {
                 fullname: fullnameInput.value.trim(),
                 email: emailInput.value.trim(),
@@ -145,19 +130,16 @@ function handleSignup() {
             
             console.log("User data to send:", userData);
             
-            // Redirect to login page after successful signup
-            // In a real application, you might want to show a success message first
             alert("Account created successfully! Please proceed with Payment.");
             window.location.href = "payments.html";
             
-            // Re-enable the button and hide loading indicator
+
             signupButton.disabled = false;
             loadingIndicator.style.display = 'none';
-        }, 2000); // 2 seconds delay to simulate server response
+        }, 2000); 
     }
 }
 
-// Allow form submission with Enter key
 document.addEventListener('keypress', function(e) {
     if (e.key === 'Enter') {
         handleSignup();

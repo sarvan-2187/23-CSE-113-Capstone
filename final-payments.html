@@ -1103,7 +1103,6 @@ document.addEventListener('DOMContentLoaded', function() {
             return false;
         }
         
-        // Continue with your existing form submission code
         e.preventDefault();
         
         const selectedPlan = document.querySelector('.plan-option.selected');
@@ -1141,17 +1140,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Add this function which is missing from the original code
 
-// Function to select payment method
 function selectPayment(method) {
-    // Remove 'selected' class from all payment methods
     const paymentMethods = document.querySelectorAll('.payment-method');
     paymentMethods.forEach(item => {
         item.classList.remove('selected');
     });
     
-    // Add 'selected' class to clicked payment method
     if (method === 'card') {
         document.querySelector('.payment-method:nth-child(1)').classList.add('selected');
     } else if (method === 'payTM') {
